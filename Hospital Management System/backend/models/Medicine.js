@@ -1,7 +1,7 @@
 // backend/models/Medicine.js
 const { DataTypes } = require('sequelize'); // Import DataTypes for defining model fields
 const sequelize = require('../config/database'); // Import the Sequelize instance
-const Patient = require('./Patient');
+const Patient = require('../core/entities/Patient');
 const Medicine = sequelize.define('Medicine', {
   Medicine_ID: {
     type: DataTypes.INTEGER,

@@ -49,6 +49,7 @@ const CreateReport = ({ onClose, onSaveSuccess }) => {
   }, [token]);
   
   const fetchRoomCost = async (patientId) => {
+    console.log('Fetching medicine cost for patient ID:', patientId); // Log the patient ID
     try {
       const response = await axios.get(`http://localhost:9004/api/patient/${patientId}/room-cost`, {
         headers: {

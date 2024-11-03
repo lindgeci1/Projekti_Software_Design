@@ -96,7 +96,7 @@ function Payroll({
 
     const handleDeleteConfirm = async () => {
         try {
-            await axios.delete(`http://localhost:9004/api/payroll/delete/${deletePayrollId}`);
+            await axios.delete(`http://localhost:9004/api/payroll/delete/${deletePayrollId}`, { headers: { 'Authorization': `Bearer ${token}` } });
             setPayroll(payroll.filter((data) => data.Account_no !== deletePayrollId));
         } catch (err) {
             console.error('Error deleting payroll:', err);

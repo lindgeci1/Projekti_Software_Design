@@ -2,9 +2,8 @@ const Staff = require('../models/Staff');
 const Department = require('../core/entities/Department');
 const { Op } = require('sequelize');
 const Visit = require('../models/Visits');
-const Patient = require('../models/Patient');
-const Doctor = require('../models/Doctor');  // Import Doctor model
-const Nurse = require('../models/Nurse');    // Import Nurse model
+const Patient = require('../core/entities/Patient');
+const Doctor = require('../models/Doctor');  // Import Doctor model   // Import Nurse model
 const { Sequelize } = require('sequelize');
 const User = require('../models/User');
 const getDoctorByStaffEmail = async (email) => {

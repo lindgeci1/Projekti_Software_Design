@@ -1,32 +1,32 @@
 const express = require("express");
-const router = express.Router();
+const PatientController = require("../adapters/controllers/PatientController"); // Update the path if necessary
 const { authenticateToken } = require('../middleware/authMiddleware');
-const { 
-    FindAllPatients, 
-    FindSinglepatientPatient, 
-    AddPatient, 
-    UpdatePatient, 
-    DeletePatient,
-    CheckPatientExistence, 
-    FindPatientByPersonalNumber,
-    FindRoomCostByPatientId, // Import the new function,
-    FindMedicineCostByPatientId,
-    FindEmailByPatientId,
-    CheckPatientVisit
-} = require("../controllers/PatientController");
 
-// Define the routes
-router.get("/patient", authenticateToken(['admin', 'doctor', 'patient']), FindAllPatients);
-router.get("/patient/:id", authenticateToken(['admin', 'doctor', 'patient']), FindSinglepatientPatient);
-router.post("/patient/create", authenticateToken(['admin', 'doctor', 'patient']), AddPatient);
-router.put("/patient/update/:id", authenticateToken(['admin', 'doctor', 'patient']), UpdatePatient);
-router.delete("/patient/delete/:id", DeletePatient);
-router.get('/patient/check/:id', authenticateToken(['admin', 'doctor', 'patient']), CheckPatientExistence); 
-router.get('/patient/personalNumber/:personalNumber', authenticateToken(['admin', 'doctor', 'patient']), FindPatientByPersonalNumber);
+class PatientRoutes {
+    constructor() {
+        this.router = express.Router();
+        this.initializeRoutes();
+    }
 
-// New route to get room cost by patient ID
-router.get('/patient/:patientId/room-cost', authenticateToken(['admin', 'doctor', 'patient']), FindRoomCostByPatientId);
-router.get('/patients/:patientId/medicine-cost', authenticateToken(['admin', 'doctor', 'patient']),FindMedicineCostByPatientId); // Add this line
-router.get('/patient/:patientId/email', authenticateToken(['admin', 'doctor', 'patient']),FindEmailByPatientId);
-router.get('/patient/:id/visit', authenticateToken(['admin', 'doctor', 'patient']), CheckPatientVisit);
-module.exports = router;
+    initializeRoutes() {
+        this.router.get("/patient", authenticateToken(['admin', 'doctor', 'patient']), PatientController.findAllPatients.bind(PatientController));
+        this.router.get("/patient/:id", authenticateToken(['admin', 'doctor', 'patient']), PatientController.findSinglePatient.bind(PatientController));
+        this.router.post("/patient/create", authenticateToken(['admin', 'doctor', 'patient']), PatientController.addPatient.bind(PatientController));
+        this.router.put("/patient/update/:id", authenticateToken(['admin', 'doctor', 'patient']), PatientController.updatePatient.bind(PatientController));
+        this.router.delete("/patient/delete/:id", authenticateToken(['admin', 'doctor']), PatientController.deletePatient.bind(PatientController));
+        this.router.get('/patient/check/:id', authenticateToken(['admin', 'doctor', 'patient']), PatientController.checkPatientExistence.bind(PatientController));
+        this.router.get('/patient/personalNumber/:personalNumber', authenticateToken(['admin', 'doctor', 'patient']), PatientController.findPatientByPersonalNumber.bind(PatientController));
+        
+        // New routes
+        this.router.get('/patient/:patientId/room-cost', authenticateToken(['admin', 'doctor', 'patient']), PatientController.findRoomCostByPatientId.bind(PatientController));
+        this.router.get('/patients/:patientId/medicine-cost', authenticateToken(['admin', 'doctor', 'patient']), PatientController.findMedicineCostByPatientId.bind(PatientController));
+        this.router.get('/patient/:patientId/email', authenticateToken(['admin', 'doctor', 'patient']), PatientController.findEmailByPatientId.bind(PatientController));
+        this.router.get('/patient/:id/visit', authenticateToken(['admin', 'doctor', 'patient']), PatientController.checkPatientVisit.bind(PatientController));
+    }
+
+    getRouter() {
+        return this.router;
+    }
+}
+
+module.exports = new PatientRoutes().getRouter();

@@ -3,7 +3,7 @@ const User = require('../models/User');
 const UserRole = require('../models/UserRole');
 const Role = require('../models/Role');
 const { Op } = require('sequelize');
-const Patient = require('../models/Patient');
+const Patient = require('../core/entities/Patient');
 const Staff = require('../models/Staff'); // Make sure to import the Staff model
 const FindUsersWithoutEmailInPatientOrStaff = async (req, res) => {
     try {

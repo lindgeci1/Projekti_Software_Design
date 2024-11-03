@@ -138,13 +138,14 @@ function UpdatePatient({ id, onClose }) {
                     'Authorization': `Bearer ${token}`
                 }
             });
-
+    
             if (response.status === 200) {
                 navigate('/dashboard/patient');
                 window.location.reload();
             }
         } catch (error) {
-            if (error.response && error.response.status === 400) {
+            if (error.response && error.response.data.error) {
+                // Display the specific error message from the backend
                 showAlert(error.response.data.error);
             } else {
                 console.error('Error updating patient:', error);
@@ -172,7 +173,7 @@ function UpdatePatient({ id, onClose }) {
                     value={formData.Personal_Number}
                     onChange={handleChange}
                     helperText="Enter a unique personal number."
-                    disabled
+                    
                 />
                 <TextField
                     fullWidth

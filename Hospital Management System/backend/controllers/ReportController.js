@@ -2,14 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const pdf = require('pdf-creator-node');
 const nodemailer = require('nodemailer');
-const pdfTemplate = require('../documents');
+const pdfTemplate = require('../index');
 const PdfReport = require('../models/PdfReport');
 require('dotenv').config();
 const Report = require('../models/PdfReport');
 const Staff = require('../models/Staff');
 const outputFilePath = path.join(__dirname, '../result.pdf');
 const Doctor = require('../models/Doctor');
-const Patient = require('../models/Patient');
+const Patient = require('../core/entities/Patient');
 const sequelize = require('../config/database'); 
 const Bill = require('../core/entities/Bill'); // Im
 const Visit = require('../models/Visits')

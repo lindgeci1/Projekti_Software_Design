@@ -60,8 +60,10 @@ function CreatePatient({ onClose }) {
             navigate('/dashboard/patient');
             window.location.reload();
         } catch (error) {
-            if (error.response && error.response.data.error === 'Email, phone number, or personal number already exists.') {
-                setAlertMessage('A patient with the same email, phone number, or personal number already exists.');
+            // Check the response for the specific error message
+            if (error.response && error.response.data.error) {
+                // Set the alert message based on the backend response
+                setAlertMessage(error.response.data.error);
             } else {
                 setAlertMessage('Error adding patient. Please try again.');
             }
@@ -69,6 +71,7 @@ function CreatePatient({ onClose }) {
             setShowErrorModal(true);
         }
     };
+    
     
 
     const handleValidation = () => {

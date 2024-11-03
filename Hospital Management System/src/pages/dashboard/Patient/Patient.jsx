@@ -89,7 +89,7 @@ function Patient({ showCreateForm, setShowCreateForm, showUpdateForm, setShowUpd
 
     const handleDeleteConfirm = async () => {
         try {
-            await axios.delete(`http://localhost:9004/api/patient/delete/${deletePatientId}`);
+            await axios.delete(`http://localhost:9004/api/patient/delete/${deletePatientId}`, { headers: { 'Authorization': `Bearer ${token}` } });
             setPatients(patients.filter(item => item.Patient_ID !== deletePatientId));
             setShowUpdateForm(false);
             setShowCreateForm(false);

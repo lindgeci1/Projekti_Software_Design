@@ -1,1 +1,0 @@
-export * from "@/pages/Main_Page/Home_Page";

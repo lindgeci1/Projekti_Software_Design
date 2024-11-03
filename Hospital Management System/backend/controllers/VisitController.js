@@ -1,5 +1,5 @@
 const Visit = require('../models/Visits');
-const Patient = require('../models/Patient');
+const Patient = require('../core/entities/Patient');
 const Doctor = require('../models/Doctor');
 const Staff = require('../models/Staff');
 const { Op } = require('sequelize');

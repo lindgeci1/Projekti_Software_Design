@@ -55,6 +55,11 @@ class DepartmentRepository {
             throw error;
         }
     }
+
+    async findByName(deptName) {
+        console.log(`Repository: Checking if department with name ${deptName} exists`);
+        return await this.Department.findOne({ where: { Dept_name: deptName } });
+    }
 }
 
 module.exports = new DepartmentRepository();

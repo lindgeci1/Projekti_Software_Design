@@ -1,5 +1,5 @@
 const Emergency_Contact = require('../models/Emergency_Contact');
-const Patient = require('../models/Patient');
+const Patient = require('../core/entities/Patient');
 
 const getPatientByEmail = async (email) => {
     try {

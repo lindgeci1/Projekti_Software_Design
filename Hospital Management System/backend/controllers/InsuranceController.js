@@ -1,6 +1,6 @@
 const Insurance = require('../models/Insurance');
 const { Op, Sequelize } = require('sequelize'); //
-const Patient = require('../models/Patient');
+const Patient = require('../core/entities/Patient');
 const getPatientByEmail = async (email) => {
     try {
         const patient = await Patient.findOne({

@@ -142,7 +142,7 @@ function UpdatePayroll({ id, onClose }) {
                     value={formData.Emp_ID}
                     onChange={handleChange}
                     helperText="Select the employee for whom you are updating the payroll."
-                    disabled
+                    // disabled
                 >
                     <MenuItem value=''>Select</MenuItem>
                     {staff.map((staffMember) => (

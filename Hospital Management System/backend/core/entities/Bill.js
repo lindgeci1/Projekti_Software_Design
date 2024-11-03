@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/database');
-const Patient = require('../../models/Patient');
+const Patient = require('../entities/Patient');
 
 class Bill {
   constructor() {
@@ -38,8 +38,6 @@ class Bill {
       tableName: 'Bill',
       timestamps: false,
     });
-
-    this.model.belongsTo(Patient, { foreignKey: 'Patient_ID' });
   }
 
   getModel() {
@@ -47,4 +45,7 @@ class Bill {
   }
 }
 
-module.exports = new Bill().getModel();
+const billModel = new Bill().getModel();
+billModel.belongsTo(Patient, { foreignKey: 'Patient_ID' }); // Define association outside constructor
+
+module.exports = billModel;

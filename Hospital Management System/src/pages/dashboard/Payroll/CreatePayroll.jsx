@@ -58,17 +58,12 @@ function CreatePayroll({ onClose }) {
             navigate('/dashboard/payroll');
             window.location.reload();
         } catch (error) {
-            // Check for the specific error from the backend
-            if (error.response && error.response.status === 400) {
-                // Show the specific error message from the backend
-                showAlert(error.response.data.error);
-            } else {
-                // Handle general errors
-                console.error('Error adding payroll:', error);
-                showAlert('Error adding payroll. Please try again.');
-            }
+            console.error('Error adding payroll:', error.response.data); // Log the actual response data
+            const errorMessage = error.response?.data?.error || 'Error adding payroll. Please try again.';
+            showAlert(errorMessage);
         }
     };
+    
     
 
     const handleValidation = async () => {
