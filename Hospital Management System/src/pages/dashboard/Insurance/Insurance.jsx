@@ -100,7 +100,7 @@ function Insurance({
 
     const handleDeleteConfirm = async () => {
         try {
-            await axios.delete(`http://localhost:9004/api/insurance/delete/${deleteInsuranceId}`);
+            await axios.delete(`http://localhost:9004/api/insurance/delete/${deleteInsuranceId}`, { headers: { 'Authorization': `Bearer ${token}` } });
             setInsurance(insurance.filter((data) => data.Policy_Number !== deleteInsuranceId));
         } catch (err) {
             console.error('Error deleting insurance:', err);
