@@ -79,7 +79,7 @@ function Room({ showCreateForm, setShowCreateForm, showUpdateForm, setShowUpdate
 
     const handleDeleteConfirm = async () => {
         try {
-            await axios.delete(`http://localhost:9004/api/room/delete/${deleteRoomId}`);
+            await axios.delete(`http://localhost:9004/api/room/delete/${deleteRoomId}`, { headers: { 'Authorization': `Bearer ${token}` } });
             setRooms(rooms.filter(item => item.Room_ID !== deleteRoomId));
             setShowUpdateForm(false);
             setShowCreateForm(false);

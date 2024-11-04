@@ -14,7 +14,7 @@ function CreateRoom({ onClose }) {
     const [patients, setPatients] = useState([]);
     const [alertMessage, setAlertMessage] = useState('');
     const [showErrorModal, setShowErrorModal] = useState(false);
-    const [patientPhone, setPatientPhone] = useState(''); // New state for the patient's phone
+    const [patientPhone, setPatientPhone] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
     const token = Cookies.get('token');
@@ -26,14 +26,14 @@ function CreateRoom({ onClose }) {
         'VIP': 200.00,
     };
 
-    const [roomCost, setRoomCost] = useState(''); // State to store the dynamic room cost
+    const [roomCost, setRoomCost] = useState('');
 
     useEffect(() => {
         fetchPatients();
         const patientId = location.state?.patientId;
         if (patientId) {
             setFormData((prevState) => ({ ...prevState, Patient_ID: patientId }));
-            fetchPatientPhone(patientId); // Fetch phone number for the selected patient
+            fetchPatientPhone(patientId);
         }
     }, [location.state]);
 
@@ -53,7 +53,7 @@ function CreateRoom({ onClose }) {
             const response = await axios.get(`http://localhost:9004/api/patient/${patientId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            setPatientPhone(response.data.Phone); // Assuming the response contains the Phone field
+            setPatientPhone(response.data.Phone);
         } catch (error) {
             console.error('Error fetching patient phone:', error);
         }
@@ -64,29 +64,48 @@ function CreateRoom({ onClose }) {
         setFormData((prevState) => ({ ...prevState, [name]: value }));
 
         if (name === 'Room_type') {
-            setRoomCost(roomTypes[value] || ''); // Set room cost based on selected room type
+            setRoomCost(roomTypes[value] || '');
         }
 
-        // If the selected patient changes, fetch the new patient's phone
         if (name === 'Patient_ID') {
             fetchPatientPhone(value);
         }
     };
 
     const handleAddRoom = async () => {
-        const completeFormData = { ...formData, Room_cost: roomCost }; // Add the room cost to the formData before submitting
+        const completeFormData = { ...formData, Room_cost: roomCost };
         try {
-            await axios.post('http://localhost:9004/api/room/create', completeFormData, {
+            const response = await axios.post('http://localhost:9004/api/room/create', completeFormData, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
+            // Navigate to the room dashboard if successful
             navigate('/dashboard/room');
             window.location.reload();
         } catch (error) {
             console.error('Error adding room:', error);
-            setAlertMessage('Error adding room. Please try again.');
-            setShowErrorModal(true);
+    
+            if (error.response) {
+                // Handle specific error responses from the backend
+                const { data } = error.response;
+                if (data.error) {
+                    // If there is a specific error message, show it
+                    if (data.error === 'This patient already has a room assigned.') {
+                        showAlert('This patient already has a room assigned.');
+                    } else {
+                        showAlert(data.error); // Show other specific errors
+                    }
+                } else {
+                    // Fallback for errors that don't have a specific message
+                    showAlert('Error adding room. Please try again.');
+                }
+            } else {
+                // Handle network or other unexpected errors
+                showAlert('Error adding room. Please check your network and try again.');
+            }
         }
     };
+    
+    
     const handleValidation = async () => {
         const { Room_type, Patient_ID } = formData;
     
@@ -101,30 +120,23 @@ function CreateRoom({ onClose }) {
     
         try {
             // Check if patient exists
-            await axios.get(`http://localhost:9004/api/patient/check/${Patient_ID}`, {
+            const response = await axios.get(`http://localhost:9004/api/patient/check/${Patient_ID}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
     
-            // Call the backend to add the room and trigger backend validation
-            const completeFormData = { ...formData, Room_cost: roomCost };
-            const response = await axios.post('http://localhost:9004/api/room/create', completeFormData, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-    
-            if (response.data.success) {
-                navigate('/dashboard/room');
-                window.location.reload();
+            if (response.data.exists) {
+                // If patient exists, proceed to add the room
+                handleAddRoom(); // Call the room addition function here
+            } else {
+                showAlert('Patient does not exist.');
             }
         } catch (error) {
-            if (error.response && error.response.data && error.response.data.error) {
-                showAlert(error.response.data.error); // Display backend validation error
-            } else {
-                console.error('Error adding room:', error);
-                showAlert('Error adding room. Please try again.');
-            }
+            console.error('Error during validation:', error);
+            showAlert('Error during validation. Please try again.');
         }
     };
     
+
     const showAlert = (message) => {
         setAlertMessage(message);
         setShowErrorModal(true);
