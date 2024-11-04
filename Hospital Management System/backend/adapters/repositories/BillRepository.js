@@ -1,6 +1,6 @@
 const Bill = require("../../core/entities/Bill");
 const Medicine = require("../../models/Medicine");
-const Room = require("../../models/Room");
+const Room = require("../../core/entities/Room");
 const Visit = require("../../models/Visits");
 const PdfReport = require("../../models/PdfReport");
 const Patient = require("../../core/entities/Patient");
