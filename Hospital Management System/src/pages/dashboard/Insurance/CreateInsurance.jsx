@@ -96,17 +96,18 @@ function CreateInsurance({ onClose }) {
             navigate('/dashboard/insurance');
             window.location.reload();
         } catch (error) {
-            // Check for the specific error from the backend
-            if (error.response && error.response.status === 400) {
-                // Show the specific error message from the backend
-                showAlert(error.response.data.error);
+            // Log the full response for debugging
+            console.error('Error adding insurance:', error.response?.data || error);
+    
+            // Show specific error message from the backend if available
+            if (error.response && error.response.data && error.response.data.error) {
+                showAlert(error.response.data.error);  // Display backend error message
             } else {
-                // Handle general errors
-                console.error('Error adding insurance:', error);
                 showAlert('Error adding insurance. Please try again.');
             }
         }
     };
+    
     
     
 

@@ -67,18 +67,18 @@ async findOtherInsuranceByPolicyNumber(policyNumber) {
 }
 
 
-    async create(insuranceData) {
-        try {
-            // Create the new Insurance record
-            const newInsurance = await this.Insurance.create(insuranceData);
-            console.log("Repository: New insurance record created:", newInsurance);
-            return newInsurance;
-        } catch (error) {
-            console.error("Error creating insurance record:", error);
-            throw error;
-        }
+async create(insuranceData) {
+    try {
+        const newInsurance = await this.Insurance.create(insuranceData);
+        console.log("Repository: New insurance record created:", newInsurance);
+        return newInsurance; // Ensure this returns correctly
+    } catch (error) {
+        console.error("Error creating insurance record:", error);
+        throw error;
     }
-    
+}
+
+
     
     async update(insuranceId, insuranceData) {
         try {
