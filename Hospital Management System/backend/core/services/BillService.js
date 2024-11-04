@@ -25,11 +25,11 @@ class BillService {
     }
 
     async addBill(billData) {
-        const { Date_Issued, Amount, Patient_ID } = billData;
+        const { Date_Issued, Amount, Patient_ID, Payment_Status, Description} = billData;
         const currentDate = new Date().setHours(0, 0, 0, 0);
         const issuedDate = new Date(Date_Issued).setHours(0, 0, 0, 0);
 
-        if (!Date_Issued || !Amount || !Patient_ID || issuedDate < currentDate) {
+        if (!Date_Issued || !Amount || !Patient_ID ||!Payment_Status ||!Description|| issuedDate < currentDate) {
             throw new Error("Invalid or missing data");
         }
 
@@ -42,11 +42,11 @@ class BillService {
     }
 
     async updateBill(billId, billData) {
-        const { Date_Issued, Amount, Patient_ID } = billData;
+        const { Date_Issued, Amount, Patient_ID, Payment_Status, Description} = billData;
         const currentDate = new Date().setHours(0, 0, 0, 0);
         const issuedDate = new Date(Date_Issued).setHours(0, 0, 0, 0);
 
-        if (!Date_Issued || !Amount || !Patient_ID || issuedDate < currentDate) {
+        if (!Date_Issued || !Amount || !Patient_ID ||!Payment_Status ||!Description || issuedDate < currentDate) {
             throw new Error("Invalid or missing data");
         }
 
