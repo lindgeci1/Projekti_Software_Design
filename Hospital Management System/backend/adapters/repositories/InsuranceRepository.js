@@ -59,11 +59,13 @@ class InsuranceRepository {
         return await this.Insurance.findOne({ where: { Patient_ID: patientId } });
     }
 
-    async findOtherInsuranceByPolicyNumber(insuranceId, policyNumber) {
-        return await this.Insurance.findOne({
-            where: { Policy_Number: policyNumber, Ins_Code: { [Op.ne]: insuranceId } },
-        });
-    }
+// InsuranceRepository.js
+async findOtherInsuranceByPolicyNumber(policyNumber) {
+    return await this.Insurance.findOne({
+        where: { Ins_Code: policyNumber }
+    });
+}
+
 
     async create(insuranceData) {
         try {
