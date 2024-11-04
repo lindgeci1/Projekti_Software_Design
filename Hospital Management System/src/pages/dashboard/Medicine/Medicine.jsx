@@ -88,7 +88,7 @@ function Medicine({
 
     const handleDeleteConfirm = async () => {
         try {
-            await axios.delete(`http://localhost:9004/api/medicine/delete/${deleteMedicineId}`);
+            await axios.delete(`http://localhost:9004/api/medicine/delete/${deleteMedicineId}`, { headers: { 'Authorization': `Bearer ${token}` } });
             setMedicine(medicine.filter((item) => item.Medicine_ID !== deleteMedicineId));
         } catch (err) {
             console.error('Error deleting medicine:', err);
