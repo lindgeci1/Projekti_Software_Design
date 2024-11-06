@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 const Visit = require('../../models/Visits');
 const User = require('../../models/User');
 const Room = require('../../core/entities/Room');
-const Medicine = require('../../models/Medicine');
+const Medicine = require('../../core/entities/Medicine');
 
 class PatientRepository {
     constructor() {

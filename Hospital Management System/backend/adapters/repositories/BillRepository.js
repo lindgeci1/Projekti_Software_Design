@@ -1,5 +1,5 @@
 const Bill = require("../../core/entities/Bill");
-const Medicine = require("../../models/Medicine");
+const Medicine = require("../../core/entities/Medicine");
 const Room = require("../../core/entities/Room");
 const Visit = require("../../models/Visits");
 const PdfReport = require("../../models/PdfReport");

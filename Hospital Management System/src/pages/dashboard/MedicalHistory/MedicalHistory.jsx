@@ -44,25 +44,37 @@ function MedicalHistory({ showCreateForm, setShowCreateForm, showUpdateForm, set
             try {
                 const endpoint = 'http://localhost:9004/api/medicalhistory';
                 const response = await axios.get(endpoint, { headers: { 'Authorization': `Bearer ${token}` } });
-                const data = response.data.medicalHistories;
+                
 
+                console.log('API Response:', response.data);
+                // Check if response.data is an array
+                if (!Array.isArray(response.data)) {
+                    console.error('Unexpected response structure:', response.data);
+                    setMedicalHistorys([]); // Set an empty array if response is not an array
+                    return;
+                }
+    
+                const data = response.data;
+    
                 const medicalHistoriesDataWithNames = data.map(history => ({
                     ...history,
                     Patient_Name: history.Patient ? `${history.Patient.Patient_Fname} ${history.Patient.Patient_Lname}` : 'Unknown Patient'
                 }));
-
+    
                 setMedicalHistorys(medicalHistoriesDataWithNames);
             } catch (err) {
                 console.error('Error fetching medical histories:', err.response ? err.response.data : err.message);
             }
         };
-
+    
         fetchMedicalHistories();
-        // Check if navigation state contains patientId to show the CreateInsurance form
+    
         if (location.state?.patientId && location.state?.showCreateForm) {
             setShowCreateForm(true);
         }
     }, [token, location.state, setShowCreateForm]);
+    
+    
 
     const handleDelete = (id) => {
         setDeleteMedicalHistoryId(id);
