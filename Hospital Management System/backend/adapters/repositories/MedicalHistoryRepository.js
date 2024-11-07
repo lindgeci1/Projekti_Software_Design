@@ -2,7 +2,7 @@ const MedicalHistory = require('../../core/entities/MedicalHistory');
 const Patient = require('../../core/entities/Patient');
 const Staff = require('../../models/Staff');
 const Doctor = require('../../models/Doctor');
-const Visit = require('../../models/Visits');
+const Visit = require('../../core/entities/Visits');
 const { Op } = require('sequelize');
 
 class MedicalHistoryRepository {

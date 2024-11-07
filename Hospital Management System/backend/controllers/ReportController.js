@@ -12,7 +12,7 @@ const Doctor = require('../models/Doctor');
 const Patient = require('../core/entities/Patient');
 const sequelize = require('../config/database'); 
 const Bill = require('../core/entities/Bill'); // Im
-const Visit = require('../models/Visits')
+const Visit = require('../core/entities/Visits')
 // Email configuration
 const transporter = nodemailer.createTransport({
     service: 'gmail',

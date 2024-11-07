@@ -56,22 +56,51 @@ function Visit({ showCreateForm, setShowCreateForm, showUpdateForm, setShowUpdat
                 const response = await axios.get(endpoint, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                const data = response.data; // Access the visits data directly from the response
     
-                const visitsDataWithNames = data.map(visit => ({
-                    ...visit,
-                    Patient_Name: visit.Patient ? `${visit.Patient.Patient_Fname} ${visit.Patient.Patient_Lname}` : 'Unknown Patient',
-                    Doctor_Name: visit.Doctor && visit.Doctor.Staff ? `${visit.Doctor.Staff.Emp_Fname} ${visit.Doctor.Staff.Emp_Lname}` : 'Unknown Doctor'
-                }));
+                console.log('API Response:', response.data); // Log the full response
     
-                setVisits(visitsDataWithNames);
+                const data = response.data;
+    
+                // Check if data is an array of visits
+                if (Array.isArray(data)) {
+                    // If it's an array, map over the data
+                    const visitsDataWithNames = data.map(visit => ({
+                        ...visit,
+                        Patient_Name: visit.Patient ? `${visit.Patient.Patient_Fname} ${visit.Patient.Patient_Lname}` : 'Unknown Patient',
+                        Doctor_Name: visit.Doctor && visit.Doctor.Staff ? `${visit.Doctor.Staff.Emp_Fname} ${visit.Doctor.Staff.Emp_Lname}` : 'Unknown Doctor'
+                    }));
+    
+                    setVisits(visitsDataWithNames);
+                } else {
+                    // If data is not an array, handle as an object
+                    console.error('Expected an array but received an object:', data);
+    
+                    // Example fallback, assuming it's a single visit object or doctor information
+                    if (data.Doctor_ID) {
+                        // If it's a doctor object, you might handle it differently
+                        setVisits([{
+                            ...data,
+                            Doctor_Name: `${data.Emp_Fname} ${data.Emp_Lname}` // Example of extracting doctor info from the object
+                        }]);
+                    } else {
+                        // If the data is not in the expected format, set visits to empty array or handle as necessary
+                        setVisits([]);
+                    }
+                }
+    
             } catch (err) {
                 console.error('Error fetching visits:', err); // Log the entire error object
             }
         };
     
         fetchVisits();
-    }, [token]); // Only depend on the token
+    
+        // Check if navigation state contains patientId to show the CreateInsurance form
+        if (location.state?.patientId && location.state?.showCreateForm) {
+            setShowCreateForm(true);
+        }
+    }, [token, location.state, setShowCreateForm]); // Adding dependencies (token, location.state, setShowCreateForm)
+    
     
         
 
