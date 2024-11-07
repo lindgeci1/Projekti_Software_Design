@@ -93,19 +93,30 @@ function CreateEmergencyContact({ onClose }) {
                     'Authorization': `Bearer ${token}`
                 }
             });
+    
+            // Navigate to the emergency contact page and reload if successful
             navigate('/dashboard/emergency_contact');
             window.location.reload();
         } catch (error) {
-            // Check for the specific error from the backend when the phone number already exists
-            if (error.response && error.response.status === 400 && error.response.data.error === 'Emergency contact with the same phone number already exists') {
-                showAlert('Phone number already exists for another emergency contact.');
+            if (error.response && error.response.data && error.response.data.error) {
+                const backendError = error.response.data.error;
+    
+                // Check for the specific backend error message
+                if (backendError === 'Emergency contact with the same phone number already exists') {
+                    showAlert('Phone number already exists for another emergency contact.');
+                } else {
+                    // Display any other backend error messages
+                    showAlert(backendError);
+                }
             } else {
-                // Handle general errors
+                // Handle general or network errors
                 console.error('Error adding emergency contact:', error);
                 showAlert('Error adding emergency contact. Please try again.');
             }
         }
     };
+    
+    
     const handleValidation = async () => {
         const { Contact_Name, Phone, Relation, Patient_ID } = formData;
         const phoneRegex = /^(?:\+\d{1,3}\s?)?\d{3}(?:\d{6,7})$/;

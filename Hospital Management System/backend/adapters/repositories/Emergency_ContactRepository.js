@@ -1,6 +1,6 @@
 const EmergencyContact = require('../../core/entities/Emergency_Contact');
 const Patient = require('../../core/entities/Patient');
-
+const { Op } = require('sequelize');
 class EmergencyContactRepository {
     constructor() {
         this.EmergencyContact = EmergencyContact;
@@ -8,23 +8,12 @@ class EmergencyContactRepository {
     }
 
     async findAll() {
-        console.log("Repository: Fetching all emergency contacts");
-        try {
-            const emergencyContacts = await this.EmergencyContact.findAll({
-                include: [{ model: this.Patient, attributes: ["Patient_Fname", "Patient_Lname"] }],
-            });
-    
-            if (!emergencyContacts || emergencyContacts.length === 0) {
-                console.log("Repository: No emergency contacts found");
-                return [];  // Return an empty array if no contacts are found
-            }
-    
-            console.log("Repository: All emergency contacts fetched:", emergencyContacts);
-            return emergencyContacts;
-        } catch (error) {
-            console.error("Error fetching emergency contacts:", error);
-            return [];  // Return an empty array in case of an error
-        }
+        console.log("Repository: Fetching all bills");
+        const bills = await this.EmergencyContact.findAll({
+            include: [{ model: this.Patient, attributes: ["Patient_Fname", "Patient_Lname"] }],
+        });
+        console.log("Repository: All bills fetched:", bills);
+        return bills;
     }
     
 
@@ -36,6 +25,11 @@ class EmergencyContactRepository {
         throw new Error('Patient ID, Contact Name, Phone, and Relation are required.');
     }
 
+    const existingContact = await EmergencyContact.findOne({ where: { Phone } });
+        if (existingContact) {
+            throw new Error("Emergency contact with the same phone number already exists");
+        
+        }
     // Create new emergency contact
     const newContact = await this.EmergencyContact.create(data);
 
@@ -46,7 +40,10 @@ class EmergencyContactRepository {
     };
 }
 
-    
+async findById(contactId) {
+    return await this.EmergencyContact.findByPk(contactId, { include: [this.Patient] });
+}
+
 
 async update(id, data) {
     const { Patient_ID, Contact_Name, Phone, Relation } = data;
@@ -61,6 +58,20 @@ async update(id, data) {
         const existingContact = await this.EmergencyContact.findByPk(id);
         if (!existingContact) {
             throw new Error('Emergency contact not found.');
+        }
+
+        // Check if the phone number is changing
+        if (existingContact.Phone !== Phone) {
+            const existingContactWithSamePhone = await this.EmergencyContact.findOne({
+                where: {
+                    Phone: Phone,
+                    Contact_ID: { [Op.ne]: id } // Exclude the current contact by ID
+                }
+            });
+
+            if (existingContactWithSamePhone) {
+                throw new Error("Phone number is already in use by another emergency contact");
+            }
         }
 
         // Update the emergency contact
@@ -79,6 +90,7 @@ async update(id, data) {
         throw new Error(`Error updating emergency contact: ${error.message}`);
     }
 }
+
 
 
 

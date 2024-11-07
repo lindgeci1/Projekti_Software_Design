@@ -13,7 +13,7 @@ class Emergency_ContactRoutes {
         this.router.get("/emergency_contact/:id", authenticateToken(['admin', 'doctor', 'patient']), Emergency_ContactController.findSingleEmergencyContact.bind(Emergency_ContactController));
         this.router.post("/emergency_contact/create", authenticateToken(['admin', 'doctor', 'patient']), Emergency_ContactController.addEmergencyContact.bind(Emergency_ContactController));
         this.router.put("/emergency_contact/update/:id", authenticateToken(['admin', 'doctor', 'patient']), Emergency_ContactController.updateEmergencyContact.bind(Emergency_ContactController));
-        this.router.delete("/emergency_contact/delete/:id", authenticateToken(['admin', 'doctor']), Emergency_ContactController.deleteEmergencyContact.bind(Emergency_ContactController));
+        this.router.delete("/emergency_contact/delete/:id", authenticateToken(['admin', 'doctor','patient']), Emergency_ContactController.deleteEmergencyContact.bind(Emergency_ContactController));
     }
 
     getRouter() {
