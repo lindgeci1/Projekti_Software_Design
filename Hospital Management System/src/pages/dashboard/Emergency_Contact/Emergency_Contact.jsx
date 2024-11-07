@@ -46,19 +46,19 @@ function EmergencyContact({ showCreateForm, setShowCreateForm, showUpdateForm, s
             try {
                 const endpoint = 'http://localhost:9004/api/emergency_contact';
                 const response = await axios.get(endpoint, { headers: { 'Authorization': `Bearer ${token}` } });
-                const data = response.data.emergencyContacts;
-
+                const data = response.data || [];  // Ensure data is always an array
+        
                 const emergencyContactsDataWithNames = data.map(contact => ({
                     ...contact,
-                    Patient_Name: contact.Patient ? `${contact.Patient.Patient_Fname} ${contact.Patient.Patient_Lname}` : 'Unknown'
+                    Patient_Name: contact.Patient ? `${contact.Patient.Patient_Fname} ${contact.Patient.Patient_Lname}` : 'Unknown Patient'
                 }));
-
+    
                 setEmergencyContacts(emergencyContactsDataWithNames);
             } catch (err) {
-                console.error('Error fetching emergency contacts:', err.response ? err.response.data : err.message);
+                console.error('Error fetching emergency contacts:', err);  // Log the full error object
             }
         };
-
+    
         fetchEmergencyContacts();
 
         // Check if navigation state contains patientId to show the CreateEmergencyContact form

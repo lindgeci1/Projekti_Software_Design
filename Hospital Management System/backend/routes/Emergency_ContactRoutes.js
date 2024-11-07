@@ -1,19 +1,24 @@
-// backend/routes/MedicineRoutes.js
 const express = require("express");
-const {
-    FindAllEmergency_Contact,
-    FindSingleEmergency_Contact,
-    AddEmergency_Contact,
-    UpdateEmergency_Contact,
-    DeleteEmergency_Contact
-} = require("../controllers/Emergency_ContactController");
+const Emergency_ContactController = require("../adapters/controllers/Emergency_ContactController"); // Updated to match the file name
 const { authenticateToken } = require('../middleware/authMiddleware');
-const router = express.Router();
 
-router.get("/emergency_contact", authenticateToken(['admin', 'doctor', 'patient']), FindAllEmergency_Contact);
-router.get("/emergency_contact/:id", authenticateToken(['admin', 'doctor', 'patient']), FindSingleEmergency_Contact);
-router.post("/emergency_contact/create", authenticateToken(['admin', 'doctor', 'patient']), AddEmergency_Contact);
-router.put("/emergency_contact/update/:id", authenticateToken(['admin', 'doctor', 'patient']), UpdateEmergency_Contact);
-router.delete("/emergency_contact/delete/:id", DeleteEmergency_Contact);
+class Emergency_ContactRoutes {
+    constructor() {
+        this.router = express.Router();
+        this.initializeRoutes();
+    }
 
-module.exports = router;
+    initializeRoutes() {
+        this.router.get("/emergency_contact", authenticateToken(['admin', 'doctor', 'patient']), Emergency_ContactController.findAllEmergencyContacts.bind(Emergency_ContactController));
+        this.router.get("/emergency_contact/:id", authenticateToken(['admin', 'doctor', 'patient']), Emergency_ContactController.findSingleEmergencyContact.bind(Emergency_ContactController));
+        this.router.post("/emergency_contact/create", authenticateToken(['admin', 'doctor', 'patient']), Emergency_ContactController.addEmergencyContact.bind(Emergency_ContactController));
+        this.router.put("/emergency_contact/update/:id", authenticateToken(['admin', 'doctor', 'patient']), Emergency_ContactController.updateEmergencyContact.bind(Emergency_ContactController));
+        this.router.delete("/emergency_contact/delete/:id", authenticateToken(['admin', 'doctor']), Emergency_ContactController.deleteEmergencyContact.bind(Emergency_ContactController));
+    }
+
+    getRouter() {
+        return this.router;
+    }
+}
+
+module.exports = new Emergency_ContactRoutes().getRouter(); // Updated to match the class name
