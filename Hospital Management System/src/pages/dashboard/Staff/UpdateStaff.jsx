@@ -201,7 +201,9 @@
                 window.location.reload(); // Reload the page
             } catch (error) {
                 console.error('Error updating staff:', error);
-                showAlert('Error updating staff.');
+        // Show specific backend error message if available
+        const backendError = error.response?.data?.message || 'Error updating staff.';
+        showAlert(backendError);
             }
         };
         

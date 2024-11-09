@@ -4,7 +4,7 @@ const UserRole = require('../models/UserRole');
 const Role = require('../models/Role');
 const { Op } = require('sequelize');
 const Patient = require('../core/entities/Patient');
-const Staff = require('../models/Staff'); // Make sure to import the Staff model
+const Staff = require('../core/entities/Staff'); // Make sure to import the Staff model
 const FindUsersWithoutEmailInPatientOrStaff = async (req, res) => {
     try {
         // Fetch all users with their associated roles

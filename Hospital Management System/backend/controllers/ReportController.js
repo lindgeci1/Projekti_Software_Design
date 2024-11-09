@@ -6,7 +6,7 @@ const pdfTemplate = require('../index');
 const PdfReport = require('../models/PdfReport');
 require('dotenv').config();
 const Report = require('../models/PdfReport');
-const Staff = require('../models/Staff');
+const Staff = require('../core/entities/Staff');
 const outputFilePath = path.join(__dirname, '../result.pdf');
 const Doctor = require('../models/Doctor');
 const Patient = require('../core/entities/Patient');

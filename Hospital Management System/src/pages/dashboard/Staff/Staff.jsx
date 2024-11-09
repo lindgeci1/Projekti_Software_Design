@@ -60,22 +60,36 @@ function Staff({
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                const staffDataWithNames = staffRes.data.map(staff => {
-                    const department = staff.Department;
-                    return {
-                        ...staff,
-                        Dept_Name: department ? `${department.Dept_name}` : 'Unknown'
-                    };
-                });
-                setStaff(staffDataWithNames);
-                setIsDataLoaded(true);
+    
+                // Log the raw API response for debugging
+                console.log('Staff API Response:', staffRes.data);
+    
+                // Check if the staffRes.data is in the expected format
+                const staffData = Array.isArray(staffRes.data) ? staffRes.data : staffRes.data.data;
+                
+                if (Array.isArray(staffData)) {
+                    const staffDataWithNames = staffData.map(staff => {
+                        const department = staff.Department || {};  // Safeguard against undefined Department
+                        return {
+                            ...staff,
+                            Dept_Name: department.Dept_name || 'Unknown'  // Handle missing department names
+                        };
+                    });
+                    setStaff(staffDataWithNames);
+                    setIsDataLoaded(true);
+                } else {
+                    console.error('Unexpected staff data format:', staffRes.data);
+                }
             } catch (err) {
                 console.error('Error fetching data:', err);
             }
         };
-
+    
         fetchData();
     }, [token]);
+    
+    
+    
 
     const handleUpdateButtonClick = (staffId) => {
         setSelectedStaffId(staffId);

@@ -1,27 +1,26 @@
 const express = require("express");
-const router = express.Router();
 const { authenticateToken } = require('../middleware/authMiddleware');
+const StaffController = require("../adapters/controllers/StaffController"); // Update the path if necessary
 
-const {
-    FindAllStaff,
-    FindSingleStaff,
-    AddStaff,
-    UpdateStaff,
-    DeleteStaff,
-    CheckStaffExistence,
-    FindNurses,
-    FindDoctors,
-    getDoctorData
-} = require("../controllers/StaffController");
+class StaffRoutes {
+    constructor() {
+        this.router = express.Router();
+        this.initializeRoutes();
+    }
 
-router.get("/staff", authenticateToken(['admin', 'doctor', 'patient']), FindAllStaff);
-router.get("/staff/nurses", authenticateToken(['admin', 'doctor', 'patient']), FindNurses); 
-router.get("/staff/doctors", authenticateToken(['admin', 'doctor', 'patient']), FindDoctors); 
-router.get("/staff/:id", authenticateToken(['admin', 'doctor', 'patient']), FindSingleStaff);
-router.post("/staff/create", authenticateToken(['admin', 'doctor', 'patient']), AddStaff);
-router.put("/staff/update/:id", authenticateToken(['admin', 'doctor', 'patient']), UpdateStaff);
-router.delete("/staff/delete/:id", authenticateToken(['admin']), DeleteStaff);
-router.get('/staff/check/:id', authenticateToken(['admin', 'doctor', 'patient']), CheckStaffExistence);
-router.get('/doctor/data', authenticateToken(['admin','doctor']), getDoctorData); // New route
+    initializeRoutes() {
+        this.router.get("/staff", authenticateToken(['admin', 'doctor', 'patient']), StaffController.findAllStaff.bind(StaffController));
+        this.router.get("/staff/doctors", authenticateToken(['admin', 'doctor', 'patient']), StaffController.findDoctors.bind(StaffController));
+        this.router.get("/staff/:id", authenticateToken(['admin', 'doctor', 'patient']), StaffController.findSingleStaff.bind(StaffController));
+        this.router.post("/staff/create", authenticateToken(['admin', 'doctor']), StaffController.addStaff.bind(StaffController));
+        this.router.put("/staff/update/:id", authenticateToken(['admin', 'doctor']), StaffController.updateStaff.bind(StaffController));
+        this.router.delete("/staff/delete/:id", authenticateToken(['admin']), StaffController.deleteStaff.bind(StaffController));
+        this.router.get("/staff/check/:id", authenticateToken(['admin', 'doctor', 'patient']), StaffController.checkStaffExistence.bind(StaffController));
+    }
 
-module.exports = router;
+    getRouter() {
+        return this.router;
+    }
+}
+
+module.exports = new StaffRoutes().getRouter();

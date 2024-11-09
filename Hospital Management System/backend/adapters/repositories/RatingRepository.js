@@ -1,5 +1,5 @@
 const Rating = require("../../core/entities/Rating");
-const Staff = require("../../models/Staff");
+const Staff = require("../../core/entities/Staff");
 const Doctor = require("../../models/Doctor");
 const sequelize = require("../../config/database");
 const { Op } = require("sequelize");

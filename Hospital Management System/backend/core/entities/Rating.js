@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize'); // Import DataTypes for defining model fields
 const sequelize = require('../../config/database'); // Import the Sequelize instance
-const Staff = require('../../models/Staff'); // Import the Staff model for association
+const Staff = require('../entities/Staff'); // Import the Staff model for association
 
 class Rating {
   constructor() {

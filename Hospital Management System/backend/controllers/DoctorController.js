@@ -1,5 +1,5 @@
 const Doctor = require('../models/Doctor');
-const Staff = require('../models/Staff');
+const Staff = require('../core/entities/Staff');
 
 const FindAllDoctors = async (req, res) => {
     try {

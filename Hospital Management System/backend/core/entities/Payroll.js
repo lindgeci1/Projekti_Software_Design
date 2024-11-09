@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/database');
-const Staff = require('../../models/Staff');
+const Staff = require('../entities/Staff');
 
 class Payroll {
   constructor() {

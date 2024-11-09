@@ -1,7 +1,7 @@
 // InsuranceRepository.js
 const Insurance = require("../../core/entities/Insurance");
 const Patient = require("../../core/entities/Patient");
-const Staff = require("../../models/Staff");
+const Staff = require("../../core/entities/Staff");
 const Visit = require("../../core/entities/Visits");
 const PdfReport = require("../../models/PdfReport"); // If relevant for insurance
 const sequelize = require("../../config/database");

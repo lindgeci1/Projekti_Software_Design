@@ -78,9 +78,14 @@ function CreateStaff({ onClose }) {
             window.location.reload();
         } catch (error) {
             console.error('Error adding Staff:', error);
-            showAlert(error.response.data.error);
+            if (error.response && error.response.data && error.response.data.error) {
+                showAlert(error.response.data.error); // Display the error message from the backend
+            } else {
+                showAlert('An unexpected error occurred.');
+            }
         }
     };
+    
 
     const showAlert = (message) => {
         setAlertMessage(message);

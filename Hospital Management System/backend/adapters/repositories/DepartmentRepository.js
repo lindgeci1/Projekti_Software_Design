@@ -1,5 +1,5 @@
 const Department = require("../../core/entities/Department");
-const Staff = require("../../models/Staff"); // Import Staff model
+const Staff = require("../../core/entities/Staff"); // Import Staff model
 const sequelize = require("../../config/database");
 const { Op } = require("sequelize");
 

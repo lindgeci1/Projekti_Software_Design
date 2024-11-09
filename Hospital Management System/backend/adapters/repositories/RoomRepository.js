@@ -1,7 +1,7 @@
 const Room = require('../../core/entities/Room');
 const { Op } = require('sequelize');
 const Patient = require('../../core/entities/Patient');
-const Staff = require('../../models/Staff');
+const Staff = require('../../core/entities/Staff');
 const Visit = require('../../core/entities/Visits');
 const Doctor = require('../../models/Doctor');
 const sequelize = require('../../config/database');
