@@ -80,7 +80,7 @@ const refreshReports = async () => {
 
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`http://localhost:9004/api/report/delete/${deleteReportId}`);
+      await axios.delete(`http://localhost:9004/api/report/delete/${deleteReportId}`, { headers: { 'Authorization': `Bearer ${token}` } });
       setReports(reports.filter(item => item.Report_ID !== deleteReportId));
 
       if (showCreateForm) {
