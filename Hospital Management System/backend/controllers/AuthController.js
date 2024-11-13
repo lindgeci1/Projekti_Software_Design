@@ -1,9 +1,9 @@
 require('dotenv').config(); // Load environment variables from .env file
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const Role = require('../models/Role');
-const UserRole = require('../models/UserRole');
+const User = require('../core/entities/User');
+const Role = require('../core/entities/Role');
+const UserRole = require('../core/entities/UserRole');
 const nodemailer = require('nodemailer');
 const generateRandomToken = require('../Utils/tokenUtils'); // Import the utility function
 const generateDynamicJwtToken = require('../Utils/JWTUtils');  // Import the utility function

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User'); // Assuming you have a User model
+const User = require('../core/entities/User'); // Assuming you have a User model
 
 // Route for handling registration
 router.post('/register', async (req, res) => {

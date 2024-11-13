@@ -42,19 +42,19 @@ export function Profile() {
     fetchUserRole();
   }, [token]);
 
-  useEffect(() => {
-    const fetchUsersWithoutEmail = async () => {
-      try {
-        const response = await axios.get('http://localhost:9004/api/userswithnopatientorstaff', { headers: { 'Authorization': `Bearer ${token}` } });
-        setUsersWithoutEmail(response.data); // Assuming response.data is an array of user objects
-        console.log('Users without existing email:', response.data); // Debug log
-      } catch (err) {
-        console.error('Error fetching users without email:', err.response ? err.response.data : err.message);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUsersWithoutEmail = async () => {
+  //     try {
+  //       const response = await axios.get('http://localhost:9004/api/userswithnopatientorstaff', { headers: { 'Authorization': `Bearer ${token}` } });
+  //       setUsersWithoutEmail(response.data); // Assuming response.data is an array of user objects
+  //       console.log('Users without existing email:', response.data); // Debug log
+  //     } catch (err) {
+  //       console.error('Error fetching users without email:', err.response ? err.response.data : err.message);
+  //     }
+  //   };
 
-    fetchUsersWithoutEmail();
-  }, [token]);
+  //   fetchUsersWithoutEmail();
+  // }, [token]);
   const showAlert = (message) => {
     setAlertMessage(message);
     setShowErrorModal(true);

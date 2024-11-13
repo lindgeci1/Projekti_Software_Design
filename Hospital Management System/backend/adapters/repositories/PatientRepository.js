@@ -1,7 +1,7 @@
 const Patient = require('../../core/entities/Patient');
 const { Op } = require('sequelize');
 const Visit = require('../../core/entities/Visits');
-const User = require('../../models/User');
+const User = require('../../core/entities/User');
 const Room = require('../../core/entities/Room');
 const Medicine = require('../../core/entities/Medicine');
 
@@ -65,12 +65,12 @@ class PatientRepository {
         try {
             const { Personal_Number, Patient_Fname, Patient_Lname, Birth_Date, Blood_type, Email, Gender, Phone } = patientData;
             const personalNumberStr = String(Personal_Number);
-
+    
             const personalNumberRegex = /^\d{10}$/;
             const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            const phoneRegex = /^(?:\+\d{1,2}\s?)?(?:\d{3})(?:\d{6})$/;
+            const phoneRegex = /^\d{9}$/;  // Exactly 9 digits
             const bloodTypeRegex = /^(A|B|AB|O)[+-]$/;
-
+    
             if (
                 !personalNumberStr.match(personalNumberRegex) ||
                 !Patient_Fname ||
@@ -83,16 +83,16 @@ class PatientRepository {
             ) {
                 throw new Error('Invalid input data');
             }
-
+    
             const existingPatient = await this.Patient.findOne({
                 where: { [Op.or]: [{ Email: Email }, { Phone: Phone }, { Personal_Number: Personal_Number }] }
             });
-
+    
             if (existingPatient) throw new Error('Email, phone number, or personal number already exists');
-
+    
             const user = await this.User.findOne({ where: { email: Email } });
             if (!user) throw new Error('No user found with the provided email');
-
+    
             return await this.Patient.create({
                 ...patientData,
                 user_id: user.user_id
@@ -102,6 +102,7 @@ class PatientRepository {
             throw error;
         }
     }
+    
 
     async updatePatient(patientId, patientData) {
         try {

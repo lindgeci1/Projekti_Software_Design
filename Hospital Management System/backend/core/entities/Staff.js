@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/database');
 const Department = require('../entities/Department'); // Import the Department model
-const User = require('../../models/User');
+const User = require('./User');
 
 class Staff {
   constructor() {

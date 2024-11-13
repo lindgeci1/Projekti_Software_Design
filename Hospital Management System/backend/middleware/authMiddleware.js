@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../core/entities/User');
 require('dotenv').config();
 
 // Middleware function to authorize user roles
