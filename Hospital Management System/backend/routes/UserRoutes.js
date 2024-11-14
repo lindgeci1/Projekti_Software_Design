@@ -1,7 +1,7 @@
 const express = require("express");
 const { authenticateToken } = require('../middleware/authMiddleware');
 const UserController = require("../adapters/controllers/UserController"); // Import UserController
-const { loginUser, registerUser } = require("../controllers/AuthController");
+const { loginUser, registerUser } = require("../adapters/repositories/AuthRepository");
 class UserRoutes {
     constructor() {
         this.router = express.Router();
@@ -17,7 +17,7 @@ class UserRoutes {
         this.router.delete("/users/delete/:id", authenticateToken(['admin', 'doctor', 'patient']), UserController.DeleteUser.bind(UserController));
 
         // Additional user-specific routes
-        
+       
 
         // Routes for login and registration
         this.router.post("/login", loginUser);

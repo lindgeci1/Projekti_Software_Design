@@ -6,10 +6,10 @@ const bodyParser = require('body-parser');
 
 const fileUpload = require('express-fileupload');
 
-const { getExpirationTime } = require('./controllers/AuthController'); // Import the shared module
-const { getExpirationTimeJWT } = require('./controllers/AuthController'); // Import the shared module
+const { getExpirationTime } = require('./adapters/repositories/AuthRepository'); // Import the shared module
+const { getExpirationTimeJWT } = require('./adapters/repositories/AuthRepository'); // Import the shared module
 
-const{refreshAccessToken} = require('./controllers/AuthController');
+// const{refreshAccessToken} = require('./controllers/AuthController');
 
 const sequelize = require("./config/database");
 const MedicineRoute = require("./routes/MedicineRoutes");
