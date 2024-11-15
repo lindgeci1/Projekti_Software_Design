@@ -1,11 +1,14 @@
 const VisitPort = require("../../ports/VisitPort");
 
 class VisitController {
+    constructor(visitPort) {
+        this.visitPort = visitPort;
+    }
     // Fetch all visits for the user (based on their role)
     async findAllVisits(req, res) {
         console.log("Fetching visits for user:", req.user);
         try {
-            const visits = await VisitPort.findAllVisits(req.user);
+            const visits = await this.visitPort.findAllVisits(req.user);
             res.status(200).json(visits);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -15,7 +18,7 @@ class VisitController {
     // Fetch a single visit by ID
     async findSingleVisit(req, res) {
         try {
-            const visit = await VisitPort.findSingleVisit(req.params.id);
+            const visit = await this.visitPort.findSingleVisit(req.params.id);
             if (!visit) {
                 return res.status(404).json({ message: "Visit not found" });
             }
@@ -29,7 +32,7 @@ class VisitController {
     async findVisitsByPatientId(req, res) {
         const { patientId } = req.params;
         try {
-            const visits = await VisitPort.findVisitsByPatientId(patientId);
+            const visits = await this.visitPort.findVisitsByPatientId(patientId);
             if (!visits.length) {
                 return res.status(404).json({ error: 'Visits not found' });
             }
@@ -44,7 +47,7 @@ class VisitController {
     // Add a new visit
     async addVisit(req, res) {
         try {
-            const newVisit = await VisitPort.addVisit(req.body);
+            const newVisit = await this.visitPort.addVisit(req.body);
             res.status(201).json(newVisit);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -54,7 +57,7 @@ class VisitController {
     // Update an existing visit
     async updateVisit(req, res) {
         try {
-            const updatedVisit = await VisitPort.updateVisit(req.params.id, req.body);
+            const updatedVisit = await this.visitPort.updateVisit(req.params.id, req.body);
             if (!updatedVisit) {
                 return res.status(404).json({ message: "Visit not found or could not be updated" });
             }
@@ -67,7 +70,7 @@ class VisitController {
     // Delete a visit by its ID
     async deleteVisit(req, res) {
         try {
-            const deletedVisit = await VisitPort.deleteVisit(req.params.id);
+            const deletedVisit = await this.visitPort.deleteVisit(req.params.id);
             if (!deletedVisit) {
                 return res.status(404).json({ message: "Visit not found" });
             }
@@ -78,4 +81,4 @@ class VisitController {
     }
 }
 
-module.exports = new VisitController();
+module.exports = new VisitController(VisitPort);
