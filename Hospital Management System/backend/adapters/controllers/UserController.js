@@ -1,11 +1,14 @@
 const UserPort = require("../../ports/UserPort");
 
 class UserController {
+    constructor(userPort) {
+        this.userPort = userPort;
+    }
     // Fetch all users (for admin)
     async findAllUsers(req, res) {
         console.log("Fetching users for user:", req.user);
         try {
-            const users = await UserPort.findAllUsers();
+            const users = await this.userPort.findAllUsers();
             res.status(200).json(users);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -15,7 +18,7 @@ class UserController {
     // Fetch a single user by ID
     async findSingleUser(req, res) {
         try {
-            const user = await UserPort.findSingleUser(req.params.id);
+            const user = await this.userPort.findSingleUser(req.params.id);
             if (!user) {
                 return res.status(404).json({ message: "User not found" });
             }
@@ -31,7 +34,7 @@ async AddUser(req, res) {
     const { email, username, password, role } = req.body;
 
     // Call the service method with the request body data
-    const result = await UserPort.AddUser({ email, username, password, role });
+    const result = await this.userPort.AddUser({ email, username, password, role });
 
     // Handle the response based on the result
     if (result.error) {
@@ -49,7 +52,7 @@ async AddUser(req, res) {
 // Controller Layer (UserController.js)
 async UpdateUser(req, res) {
     try {
-        const updatedUser = await UserPort.UpdateUser(req.params.id, req.body);  // Pass ID and body to port
+        const updatedUser = await this.userPort.UpdateUser(req.params.id, req.body);  // Pass ID and body to port
 
         // If the update was successful
         if (updatedUser.success) {
@@ -75,7 +78,7 @@ async DeleteUser(req, res) {
         console.log("Received user ID:", userId);  // Debug log
 
         // Pass the userId to UserPort
-        const deletedUser = await UserPort.DeleteUser(userId);
+        const deletedUser = await this.userPort.DeleteUser(userId);
 
         // If there is an error, return an error response
         if (deletedUser.error) {
@@ -99,7 +102,7 @@ async DeleteUser(req, res) {
     // Get users with their roles
     async getUsersWithRoles(req, res) {
         try {
-            const users = await UserPort.getUsersWithRoles();
+            const users = await this.userPort.getUsersWithRoles();
             if (!users || users.length === 0) {
                 return res.status(404).json({ message: 'No users found' });
             }
@@ -111,4 +114,4 @@ async DeleteUser(req, res) {
     
 }
 
-module.exports = new UserController();
+module.exports = new UserController(UserPort);
