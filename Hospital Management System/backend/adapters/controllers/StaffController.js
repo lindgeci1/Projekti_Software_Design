@@ -1,11 +1,14 @@
 const StaffPort = require("../../ports/StaffPort");
 
 class StaffController {
+    constructor(staffPort) {
+        this.staffPort = staffPort;
+    }
     // Get all staff based on the user's role
     async findAllStaff(req, res) {
         console.log("Fetching staff for user:", req.user);
         try {
-            const staff = await StaffPort.findAllStaff(req.user);
+            const staff = await this.staffPort.findAllStaff(req.user);
             res.status(200).json(staff);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -15,7 +18,7 @@ class StaffController {
     // Get a single staff member by their ID
     async findSingleStaff(req, res) {
         try {
-            const staff = await StaffPort.findSingleStaff(req.params.id);
+            const staff = await this.staffPort.findSingleStaff(req.params.id);
             if (!staff) {
                 return res.status(404).json({ message: "Staff member not found" });
             }
@@ -28,7 +31,7 @@ class StaffController {
     // Find a staff member by email
     async findStaffByEmail(req, res) {
         try {
-            const staff = await StaffPort.findStaffByEmail(req.params.email);
+            const staff = await this.staffPort.findStaffByEmail(req.params.email);
             if (!staff) {
                 return res.status(404).json({ message: "Staff member not found" });
             }
@@ -41,7 +44,7 @@ class StaffController {
     // Get a list of all doctors
     async findDoctors(req, res) {
         try {
-            const doctors = await StaffPort.findDoctors();
+            const doctors = await this.staffPort.findDoctors();
             res.status(200).json(doctors);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -51,7 +54,7 @@ class StaffController {
     // Add a new staff member
     async addStaff(req, res) {
         try {
-            const newStaff = await StaffPort.addStaff(req.body);
+            const newStaff = await this.staffPort.addStaff(req.body);
             res.status(201).json(newStaff);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -61,7 +64,7 @@ class StaffController {
     // Update an existing staff member's details
     async updateStaff(req, res) {
         try {
-            await StaffPort.updateStaff(req.params.id, req.body);
+            await this.staffPort.updateStaff(req.params.id, req.body);
             res.status(200).json({ message: 'Staff updated successfully' });
         } catch (error) {
             console.error('Error updating staff:', error);
@@ -72,7 +75,7 @@ class StaffController {
     // Delete a staff member
     async deleteStaff(req, res) {
         try {
-            const deletedStaff = await StaffPort.deleteStaff(req.params.id);
+            const deletedStaff = await this.staffPort.deleteStaff(req.params.id);
             if (!deletedStaff) {
                 return res.status(404).json({ message: "Staff member not found" });
             }
@@ -85,7 +88,7 @@ class StaffController {
     // Check if a staff member exists by their ID
     async checkStaffExistence(req, res) {
         try {
-            const exists = await StaffPort.checkStaffExistence(req.params.id);
+            const exists = await this.staffPort.checkStaffExistence(req.params.id);
             res.status(200).json({ exists });
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -95,7 +98,7 @@ class StaffController {
     // Get doctor details based on the staff email
     async getDoctorByStaffEmail(req, res) {
         try {
-            const doctor = await StaffPort.getDoctorByStaffEmail(req.params.email);
+            const doctor = await this.staffPort.getDoctorByStaffEmail(req.params.email);
             if (!doctor) {
                 return res.status(404).json({ message: "Doctor not found" });
             }
@@ -106,4 +109,4 @@ class StaffController {
     }
 }
 
-module.exports = new StaffController();
+module.exports = new StaffController(StaffPort);
