@@ -1,11 +1,13 @@
-// MedicalHistoryController.js
 const MedicalHistoryPort = require("../../ports/MedicalHistoryPort");
 
 class MedicalHistoryController {
+    constructor(medicalHistoryPort) {
+        this.medicalHistoryPort = medicalHistoryPort;
+    }
     async findAllMedicalHistories(req, res) {
         console.log("Fetching medical histories for user:", req.user);
         try {
-            const medicalHistories = await MedicalHistoryPort.findAllMedicalHistories(req.user);
+            const medicalHistories = await this.medicalHistoryPort.findAllMedicalHistories(req.user);
             res.status(200).json(medicalHistories);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -14,7 +16,7 @@ class MedicalHistoryController {
 
     async findSingleMedicalHistory(req, res) {
         try {
-            const medicalHistory = await MedicalHistoryPort.findSingleMedicalHistory(req.params.id);
+            const medicalHistory = await this.medicalHistoryPort.findSingleMedicalHistory(req.params.id);
             if (!medicalHistory) {
                 return res.status(404).json({ message: "Medical history not found" });
             }
@@ -26,7 +28,7 @@ class MedicalHistoryController {
 
     async addMedicalHistory(req, res) {
         try {
-            const newMedicalHistory = await MedicalHistoryPort.addMedicalHistory(req.body);
+            const newMedicalHistory = await this.medicalHistoryPort.addMedicalHistory(req.body);
             res.status(201).json(newMedicalHistory);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -35,7 +37,7 @@ class MedicalHistoryController {
 
     async updateMedicalHistory(req, res) {
         try {
-            const updatedMedicalHistory = await MedicalHistoryPort.updateMedicalHistory(req.params.id, req.body);
+            const updatedMedicalHistory = await this.medicalHistoryPort.updateMedicalHistory(req.params.id, req.body);
             if (!updatedMedicalHistory) {
                 return res.status(404).json({ message: "Medical history not found or could not be updated" });
             }
@@ -47,7 +49,7 @@ class MedicalHistoryController {
 
     async deleteMedicalHistory(req, res) {
         try {
-            const deletedMedicalHistory = await MedicalHistoryPort.deleteMedicalHistory(req.params.id);
+            const deletedMedicalHistory = await this.medicalHistoryPort.deleteMedicalHistory(req.params.id);
             if (!deletedMedicalHistory) {
                 return res.status(404).json({ message: "Medical history not found" });
             }
@@ -58,4 +60,4 @@ class MedicalHistoryController {
     }
 }
 
-module.exports = new MedicalHistoryController();
+module.exports = new MedicalHistoryController(MedicalHistoryPort);
