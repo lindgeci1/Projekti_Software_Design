@@ -1,10 +1,13 @@
 const RatingPort = require("../../ports/RatingPort");
 
 class RatingController {
+    constructor(ratingPort) {
+        this.ratingPort = ratingPort;
+    }
     async findAllRatings(req, res) {
         console.log("Fetching ratings for user:", req.user);
         try {
-            const ratings = await RatingPort.findAllRatings(req.user);
+            const ratings = await this.ratingPort.findAllRatings(req.user);
             res.status(200).json(ratings);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -13,7 +16,7 @@ class RatingController {
 
     async findSingleRating(req, res) {
         try {
-            const rating = await RatingPort.findSingleRating(req.params.id);
+            const rating = await this.ratingPort.findSingleRating(req.params.id);
             if (!rating) {
                 return res.status(404).json({ message: "Rating not found" });
             }
@@ -25,7 +28,7 @@ class RatingController {
 
     async addRating(req, res) {
         try {
-            const newRating = await RatingPort.addRating(req.body);
+            const newRating = await this.ratingPort.addRating(req.body);
             res.status(201).json(newRating);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -34,7 +37,7 @@ class RatingController {
 
     async updateRating(req, res) {
         try {
-            const updatedRating = await RatingPort.updateRating(req.params.id, req.body);
+            const updatedRating = await this.ratingPort.updateRating(req.params.id, req.body);
             if (!updatedRating) {
                 return res.status(404).json({ message: "Rating not found or could not be updated" });
             }
@@ -46,7 +49,7 @@ class RatingController {
 
     async deleteRating(req, res) {
         try {
-            const deletedRating = await RatingPort.deleteRating(req.params.id);
+            const deletedRating = await this.ratingPort.deleteRating(req.params.id);
             if (!deletedRating) {
                 return res.status(404).json({ message: "Rating not found" });
             }
@@ -57,4 +60,4 @@ class RatingController {
     }
 }
 
-module.exports = new RatingController();
+module.exports = new RatingController(RatingPort);
