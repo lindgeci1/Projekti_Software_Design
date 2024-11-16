@@ -40,13 +40,12 @@ class BillService {
 
         return await this.billRepository.create(billData);
     }
-
     async updateBill(billId, billData) {
         const { Date_Issued, Amount, Patient_ID, Payment_Status, Description} = billData;
         const currentDate = new Date().setHours(0, 0, 0, 0);
         const issuedDate = new Date(Date_Issued).setHours(0, 0, 0, 0);
 
-        if (!Date_Issued || !Amount || !Patient_ID ||!Payment_Status ||!Description || issuedDate < currentDate) {
+        if (!Date_Issued || !Amount || !Patient_ID ||!Payment_Status ||!Description) {
             throw new Error("Invalid or missing data");
         }
 
