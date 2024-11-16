@@ -2,26 +2,29 @@
 const RoomService = require("../core/services/RoomService");
 
 class RoomPort {
+    constructor(roomService) {
+        this.roomService = roomService;
+    }
     async findAllRooms(user) {
         console.log("Calling RoomService.findAllRooms with user:", user);
-        return await RoomService.findAllRooms(user);
+        return await this.roomService.findAllRooms(user);
     }
 
     async findSingleRoom(roomId) {
-        return await RoomService.findSingleRoom(roomId);
+        return await this.roomService.findSingleRoom(roomId);
     }
 
     async addRoom(roomData) {
-        return await RoomService.addRoom(roomData);
+        return await this.roomService.addRoom(roomData);
     }
 
     async updateRoom(roomId, roomData) {
-        return await RoomService.updateRoom(roomId, roomData);
+        return await this.roomService.updateRoom(roomId, roomData);
     }
 
     async deleteRoom(roomId) {
-        return await RoomService.deleteRoom(roomId);
+        return await this.roomService.deleteRoom(roomId);
     }
 }
 
-module.exports = new RoomPort();
+module.exports = new RoomPort(RoomService);
