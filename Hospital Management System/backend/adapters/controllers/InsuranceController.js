@@ -1,10 +1,13 @@
 const InsurancePort = require("../../ports/InsurancePort");
 
 class InsuranceController {
+    constructor(insurancePort) {
+        this.insurancePort = insurancePort;
+    }
     async findAllInsurances(req, res) {
         console.log("Fetching insurances for user:", req.user);
         try {
-            const insurances = await InsurancePort.findAllInsurances(req.user);
+            const insurances = await this.insurancePort.findAllInsurances(req.user);
             res.status(200).json(insurances);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -13,7 +16,7 @@ class InsuranceController {
 
     async findSingleInsurance(req, res) {
         try {
-            const insurance = await InsurancePort.findSingleInsurance(req.params.id);
+            const insurance = await this.insurancePort.findSingleInsurance(req.params.id);
             if (!insurance) {
                 return res.status(404).json({ message: "Insurance not found" });
             }
@@ -25,7 +28,7 @@ class InsuranceController {
 
     async addInsurance(req, res) {
         try {
-            const newInsurance = await InsurancePort.addInsurance(req.body);
+            const newInsurance = await this.insurancePort.addInsurance(req.body);
             res.status(201).json(newInsurance);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -34,7 +37,7 @@ class InsuranceController {
 
     async updateInsurance(req, res) {
         try {
-            const updatedInsurance = await InsurancePort.updateInsurance(req.params.id, req.body);
+            const updatedInsurance = await this.insurancePort.updateInsurance(req.params.id, req.body);
             if (!updatedInsurance) {
                 return res.status(404).json({ message: "Insurance not found or could not be updated" });
             }
@@ -46,7 +49,7 @@ class InsuranceController {
 
     async deleteInsurance(req, res) {
         try {
-            const deletedInsurance = await InsurancePort.deleteInsurance(req.params.id);
+            const deletedInsurance = await this.insurancePort.deleteInsurance(req.params.id);
             if (!deletedInsurance) {
                 return res.status(404).json({ message: "Insurance not found" });
             }
@@ -57,4 +60,4 @@ class InsuranceController {
     }
 }
 
-module.exports = new InsuranceController();
+module.exports = new InsuranceController(InsurancePort);
