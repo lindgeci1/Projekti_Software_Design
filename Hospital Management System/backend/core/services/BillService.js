@@ -57,10 +57,6 @@ class BillService {
 
         return await this.billRepository.update(billId, billData);
     }
-
-    async deleteBill(billId) {
-        return await this.billRepository.delete(billId);
-    }
 }
 
 module.exports = new BillService(BillRepository);
