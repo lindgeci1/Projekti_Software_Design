@@ -1,10 +1,13 @@
 const EmergencyContactPort = require("../../ports/Emergency_ContactPort");
 
 class EmergencyContactController {
+    constructor(emergencyContactPort) {
+        this.emergencyContactPort = emergencyContactPort;
+    }
     async findAllEmergencyContacts(req, res) {
         console.log("Fetching emergency contacts for user:", req.user);
         try {
-            const emergencyContacts = await EmergencyContactPort.findAllEmergencyContacts(req.user);
+            const emergencyContacts = await this.emergencyContactPort.findAllEmergencyContacts(req.user);
             res.status(200).json(emergencyContacts);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -13,7 +16,7 @@ class EmergencyContactController {
 
     async findSingleEmergencyContact(req, res) {
         try {
-            const emergencyContact = await EmergencyContactPort.findSingleEmergencyContact(req.params.id);
+            const emergencyContact = await this.emergencyContactPort.findSingleEmergencyContact(req.params.id);
             if (!emergencyContact) {
                 return res.status(404).json({ message: "Emergency contact not found" });
             }
@@ -25,7 +28,7 @@ class EmergencyContactController {
 
     async addEmergencyContact(req, res) {
         try {
-            const newEmergencyContact = await EmergencyContactPort.addEmergencyContact(req.body);
+            const newEmergencyContact = await this.emergencyContactPort.addEmergencyContact(req.body);
             res.status(201).json(newEmergencyContact);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -34,7 +37,7 @@ class EmergencyContactController {
 
     async updateEmergencyContact(req, res) {
         try {
-            const updatedEmergencyContact = await EmergencyContactPort.updateEmergencyContact(req.params.id, req.body);
+            const updatedEmergencyContact = await this.emergencyContactPort.updateEmergencyContact(req.params.id, req.body);
             if (!updatedEmergencyContact) {
                 return res.status(404).json({ message: "Emergency contact not found or could not be updated" });
             }
@@ -46,7 +49,7 @@ class EmergencyContactController {
 
     async deleteEmergencyContact(req, res) {
         try {
-            const deletedEmergencyContact = await EmergencyContactPort.deleteEmergencyContact(req.params.id);
+            const deletedEmergencyContact = await this.emergencyContactPort.deleteEmergencyContact(req.params.id);
             if (!deletedEmergencyContact) {
                 return res.status(404).json({ message: "Emergency contact not found" });
             }
@@ -57,4 +60,4 @@ class EmergencyContactController {
     }
 }
 
-module.exports = new EmergencyContactController();
+module.exports = new EmergencyContactController(EmergencyContactPort);
