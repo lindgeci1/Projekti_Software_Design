@@ -1,21 +1,24 @@
 const express = require("express");
-const {
-    FindAllDoctors,
-    FindSingleDoctor,
-    AddDoctor,
-    UpdateDoctor,
-    DeleteDoctor,
-    getAllDoctors
-} = require("../controllers/DoctorController");
 const { authenticateToken } = require('../middleware/authMiddleware');
+const DoctorController = require("../adapters/controllers/DoctorController"); // Update the path if necessary
 
-const router = express.Router();
+class DoctorRoutes {
+    constructor() {
+        this.router = express.Router();
+        this.initializeRoutes();
+    }
 
-router.get("/doctors", authenticateToken(['admin', 'doctor', 'patient']), FindAllDoctors);
-router.get("/doctors/:id", authenticateToken(['admin', 'doctor', 'patient']), FindSingleDoctor);
-router.post("/doctors/create", authenticateToken(['admin', 'doctor', 'patient']), AddDoctor);
-router.put("/doctors/update/:id", authenticateToken(['admin', 'doctor', 'patient']), UpdateDoctor);
-router.delete("/doctors/delete/:id", DeleteDoctor);
-router.get('/doctor', authenticateToken(['admin', 'doctor', 'patient']), getAllDoctors);
+    initializeRoutes() {
+        this.router.get("/doctors", authenticateToken(['admin', 'doctor', 'patient']), DoctorController.findAllDoctors.bind(DoctorController));
+        this.router.get("/doctors/:id", authenticateToken(['admin', 'doctor', 'patient']), DoctorController.findSingleDoctor.bind(DoctorController));
+        this.router.post("/doctors/create", authenticateToken(['admin', 'doctor']), DoctorController.addDoctor.bind(DoctorController));
+        this.router.put("/doctors/update/:id", authenticateToken(['admin', 'doctor']), DoctorController.updateDoctor.bind(DoctorController));
+        this.router.delete("/doctors/delete/:id", authenticateToken(['admin', 'doctor']), DoctorController.deleteDoctor.bind(DoctorController));
+    }
 
-module.exports = router;
+    getRouter() {
+        return this.router;
+    }
+}
+
+module.exports = new DoctorRoutes().getRouter();

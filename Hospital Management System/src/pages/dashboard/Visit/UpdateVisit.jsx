@@ -36,7 +36,7 @@ function UpdateVisit({ id, onClose }) {
                 const [visitRes, patientRes, doctorRes] = await Promise.all([
                     axios.get(`http://localhost:9004/api/visit/${id}`, { headers: { 'Authorization': `Bearer ${token}` } }),
                     axios.get('http://localhost:9004/api/patient', { headers: { 'Authorization': `Bearer ${token}` } }),
-                    axios.get('http://localhost:9004/api/doctor', { headers: { 'Authorization': `Bearer ${token}` } })
+                    axios.get('http://localhost:9004/api/doctors', { headers: { 'Authorization': `Bearer ${token}` } })
                 ]);
                 const visitData = visitRes.data;
                 setOriginalData(visitData); // Set original data

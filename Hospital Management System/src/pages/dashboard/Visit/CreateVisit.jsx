@@ -42,7 +42,7 @@ function CreateVisit({ onClose }) {
 
     const fetchDoctors = async () => {
         try {
-            const response = await axios.get('http://localhost:9004/api/doctor', {
+            const response = await axios.get('http://localhost:9004/api/doctors', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             setDoctors(response.data);
