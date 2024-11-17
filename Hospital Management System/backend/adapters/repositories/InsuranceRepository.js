@@ -6,7 +6,7 @@ const Visit = require("../../core/entities/Visits");
 const PdfReport = require("../../core/entities/PdfReport"); // If relevant for insurance
 const sequelize = require("../../config/database");
 const { Op } = require("sequelize");
-const Doctor = require('../../models/Doctor');
+const Doctor = require('../../core/entities/Doctor');
 
 class InsuranceRepository {
     constructor() {

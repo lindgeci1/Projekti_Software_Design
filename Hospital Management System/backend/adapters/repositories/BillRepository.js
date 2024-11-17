@@ -7,7 +7,7 @@ const Patient = require("../../core/entities/Patient");
 const Staff = require("../../core/entities/Staff");
 const sequelize = require("../../config/database");
 const { Op } = require("sequelize");
-const Doctor = require('../../models/Doctor');
+const Doctor = require('../../core/entities/Doctor');
 
 class BillRepository {
     constructor() {
