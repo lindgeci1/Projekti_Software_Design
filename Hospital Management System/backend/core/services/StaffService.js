@@ -1,5 +1,5 @@
 const StaffRepository = require("../../adapters/repositories/StaffRepository");
-const Doctor = require('../../models/Doctor');
+const Doctor = require('../entities/Doctor');
 Department = require('../entities/Department');
 const User = require('../../core/entities/User');
 class StaffService {

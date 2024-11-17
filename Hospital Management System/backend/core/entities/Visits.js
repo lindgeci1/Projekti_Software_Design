@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/database');
 const Patient = require('../entities/Patient');
-const Doctor = require('../../models/Doctor');
+const Doctor = require('../entities/Doctor');
 
 class Visit {
   constructor() {

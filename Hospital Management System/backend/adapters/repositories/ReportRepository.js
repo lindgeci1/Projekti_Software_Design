@@ -8,7 +8,7 @@ require('dotenv').config();
 const Report = require('../../core/entities/PdfReport');
 const Staff = require('../../core/entities/Staff');
 const outputFilePath = path.join(__dirname, '../../result.pdf');
-const Doctor = require('../../models/Doctor');
+const Doctor = require('../../core/entities/Doctor');
 const Patient = require('../../core/entities/Patient');
 const sequelize = require('../../config/database'); 
 const Bill = require('../../core/entities/Bill'); 

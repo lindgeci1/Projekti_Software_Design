@@ -1,6 +1,6 @@
 const Staff = require("../../core/entities/Staff");
 const Department = require("../../core/entities/Department");
-const Doctor = require("../../models/Doctor");
+const Doctor = require("../../core/entities/Doctor");
 const User = require("../../core/entities/User");
 const { Op, Sequelize } = require("sequelize");
 const validateEmail = async (email) => {
