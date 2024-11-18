@@ -3,6 +3,7 @@ const Department = require("../../core/entities/Department");
 const Doctor = require("../../core/entities/Doctor");
 const User = require("../../core/entities/User");
 const { Op, Sequelize } = require("sequelize");
+const StaffPort = require("../../ports/StaffPort");
 const validateEmail = async (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return new Promise((resolve) => {
@@ -10,8 +11,9 @@ const validateEmail = async (email) => {
     });
 };
 
-class StaffRepository {
+class StaffRepository extends StaffPort{
     constructor() {
+        super();
         this.Staff = Staff;
         this.Department = Department;
         this.Doctor = Doctor;

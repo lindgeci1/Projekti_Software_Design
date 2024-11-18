@@ -1,29 +1,59 @@
-const EmergencyContactService = require("../core/services/Emergency_ContactService");
+// EmergencyContactPort.js
 
 class EmergencyContactPort {
-    constructor(emergencyContactService) {
-        this.emergencyContactService = emergencyContactService;
-    }
-    async findAllEmergencyContacts(user) {
-        console.log("Calling EmergencyContactService.findAllEmergencyContacts with user:", user);
-        return await this.emergencyContactService.findAllEmergencyContacts(user);
-    }
-
-    async findSingleEmergencyContact(emergencyContactId) {
-        return await this.emergencyContactService.findSingleEmergencyContact(emergencyContactId);
+    async findAll() {
+        try {
+            console.log(`Method: findAll`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAll: ${error.message}`);
+        }
     }
 
-    async addEmergencyContact(emergencyContactData) {
-        return await this.emergencyContactService.addEmergencyContact(emergencyContactData);
+    async findById(contactId) {
+        try {
+            console.log(`Method: findById called with ID: ${contactId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
     }
 
-    async updateEmergencyContact(emergencyContactId, emergencyContactData) {
-        return await this.emergencyContactService.updateEmergencyContact(emergencyContactId, emergencyContactData);
+    async create(data) {
+        try {
+            console.log(`Method: create called with data: ${JSON.stringify(data)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in create: ${error.message}`);
+        }
     }
 
-    async deleteEmergencyContact(emergencyContactId) {
-        return await this.emergencyContactService.deleteEmergencyContact(emergencyContactId);
+    async update(id, data) {
+        try {
+            console.log(`Method: updateEmergencyContact called with ID: ${id} and data: ${JSON.stringify(data)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in updateEmergencyContact: ${error.message}`);
+        }
+    }
+
+    async delete(id) {
+        try {
+            console.log(`Method: delete called with ID: ${id}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in delete: ${error.message}`);
+        }
+    }
+
+    async findByPatientEmail(email) {
+        try {
+            console.log(`Method: findByPatientEmail called with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByPatientEmail: ${error.message}`);
+        }
     }
 }
 
-module.exports = new EmergencyContactPort(EmergencyContactService);
+module.exports = EmergencyContactPort;

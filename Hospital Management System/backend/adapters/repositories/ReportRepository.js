@@ -12,7 +12,8 @@ const Doctor = require('../../core/entities/Doctor');
 const Patient = require('../../core/entities/Patient');
 const sequelize = require('../../config/database'); 
 const Bill = require('../../core/entities/Bill'); 
-const Visit = require('../../core/entities/Visits')
+const Visit = require('../../core/entities/Visits');
+const ReportPort = require('../../ports/ReportPort');
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -21,9 +22,10 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-class ReportRepository {
+class ReportRepository extends ReportPort{
 
     constructor() {
+        super();
         this.Visit = Visit;
         this.Patient = Patient;
         this.Doctor = Doctor;

@@ -2,9 +2,10 @@ const Department = require("../../core/entities/Department");
 const Staff = require("../../core/entities/Staff"); // Import Staff model
 const sequelize = require("../../config/database");
 const { Op } = require("sequelize");
-
-class DepartmentRepository {
+const DepartmentPort = require("../../ports/DepartmentPort");
+class DepartmentRepository extends DepartmentPort{
     constructor() {
+        super();
         this.Department = Department;
         this.Staff = Staff; // Initialize Staff model
         this.sequelize = sequelize;

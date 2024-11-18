@@ -3,9 +3,10 @@ const Staff = require("../../core/entities/Staff");
 const Doctor = require("../../core/entities/Doctor");
 const sequelize = require("../../config/database");
 const { Op } = require("sequelize");
-
-class RatingRepository {
+const RatingPort = require("../../ports/RatingPort");
+class RatingRepository extends RatingPort{
     constructor() {
+        super();
         this.Rating = Rating;
         this.Staff = Staff;
         this.sequelize = sequelize;

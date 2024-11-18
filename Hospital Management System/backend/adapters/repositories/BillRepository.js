@@ -1,3 +1,4 @@
+const BillPort = require("../../ports/BillPort");
 const Bill = require("../../core/entities/Bill");
 const Medicine = require("../../core/entities/Medicine");
 const Room = require("../../core/entities/Room");
@@ -9,8 +10,9 @@ const sequelize = require("../../config/database");
 const { Op } = require("sequelize");
 const Doctor = require('../../core/entities/Doctor');
 
-class BillRepository {
+class BillRepository extends BillPort {
     constructor() {
+        super();
         this.Bill = Bill;
         this.Medicine = Medicine;
         this.Room = Room;
@@ -20,7 +22,36 @@ class BillRepository {
         this.Staff = Staff;
         this.Doctor = Doctor;
         this.sequelize = sequelize;
+
+        // Verify that all methods from BillPort are implemented in BillRepository
+        // this._checkMethodImplementation();
     }
+
+    // This method checks if the methods in BillPort are implemented in BillRepository
+    // _checkMethodImplementation() {
+    //     // Get methods from BillPort (interface)
+    //     const methodsInBillPort = Object.getOwnPropertyNames(BillPort.prototype)
+    //         .filter(method => method !== 'constructor' && method !== '_checkMethodImplementation' && typeof BillPort.prototype[method] === 'function');
+        
+    //     // Get methods from BillRepository (implementation)
+    //     const methodsInBillRepository = Object.getOwnPropertyNames(BillRepository.prototype)
+    //         .filter(method => method !== 'constructor' && method !== '_checkMethodImplementation' && typeof BillRepository.prototype[method] === 'function');
+        
+    //     // Check that each method in the interface is implemented in the repository
+    //     methodsInBillPort.forEach(method => {
+    //         if (!methodsInBillRepository.includes(method)) {
+    //             throw new Error(`Method '${method}' from BillPort is missing in BillRepository or has been renamed.`);
+    //         }
+    //     });
+    
+    //     // Optional: Check for extra methods in BillRepository that don't exist in BillPort
+    //     methodsInBillRepository.forEach(method => {
+    //         if (!methodsInBillPort.includes(method)) {
+    //             console.warn(`Warning: Method '${method}' exists in BillRepository but not in BillPort.`);
+    //         }
+    //     });
+    // }
+    
 
     async findAll() {
         console.log("Repository: Fetching all bills");

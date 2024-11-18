@@ -1,29 +1,66 @@
-const MedicalHistoryService = require("../core/services/MedicalHistoryService");
-
 class MedicalHistoryPort {
-    constructor(medicalHistoryService) {
-        this.medicalHistoryService = medicalHistoryService;
-    }
-    async findAllMedicalHistories(user) {
-        console.log("Calling MedicalHistoryService.findAllMedicalHistories with user:", user);
-        return await this.medicalHistoryService.findAllMedicalHistories(user);
-    }
-
-    async findSingleMedicalHistory(medicalHistoryId) {
-        return await this.medicalHistoryService.findSingleMedicalHistory(medicalHistoryId);
+    async findAll() {
+        try {
+            console.log(`Calling findAll`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAll: ${error.message}`);
+        }
     }
 
-    async addMedicalHistory(medicalHistoryData) {
-        return await this.medicalHistoryService.addMedicalHistory(medicalHistoryData);
+    async findById(medicalHistoryId) {
+        try {
+            console.log(`Calling findById with ID: ${medicalHistoryId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
     }
 
-    async updateMedicalHistory(medicalHistoryId, medicalHistoryData) {
-        return await this.medicalHistoryService.updateMedicalHistory(medicalHistoryId, medicalHistoryData);
+    async create(data) {
+        try {
+            console.log(`Calling create with data: ${JSON.stringify(data)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in create: ${error.message}`);
+        }
     }
 
-    async deleteMedicalHistory(medicalHistoryId) {
-        return await this.medicalHistoryService.deleteMedicalHistory(medicalHistoryId);
+    async update(id, data) {
+        try {
+            console.log(`Calling update with ID: ${id} and data: ${JSON.stringify(data)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in update: ${error.message}`);
+        }
+    }
+
+    async delete(id) {
+        try {
+            console.log(`Calling deleteMedicalHistory with ID: ${id}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in deleteMedicalHistory: ${error.message}`);
+        }
+    }
+
+    async findByPatientEmail(email) {
+        try {
+            console.log(`Calling findByPatientEmail with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByPatientEmail: ${error.message}`);
+        }
+    }
+
+    async findByDoctorEmail(email) {
+        try {
+            console.log(`Calling findByDoctorEmail with ID: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByDoctorEmail: ${error.message}`);
+        }
     }
 }
 
-module.exports = new MedicalHistoryPort(MedicalHistoryService);
+module.exports = MedicalHistoryPort;

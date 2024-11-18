@@ -1,30 +1,71 @@
-const RatingService = require("../core/services/RatingServices");
 
 class RatingPort {
-    constructor(ratingService) {
-        this.ratingService = ratingService;
-    }
-    async findAllRatings(user) {
-        console.log("Calling RatingService.findAllRatings with user:", user);
-        return await this.ratingService.findAllRatings(user);
+
+    async findAll() {
+        try {
+            console.log("Method: findAll");
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAll: ${error.message}`);
+        }
     }
 
-    async findSingleRating(ratingId) {
-        return await this.ratingService.findSingleRating(ratingId);
+    async findById(ratingId) {
+        try {
+            console.log(`Method: findById called with ratingId: ${ratingId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
     }
 
-    async addRating(ratingData) {
-        return await this.ratingService.addRating(ratingData);
+    async create(ratingData) {
+        try {
+            console.log("Method: create called with data:", JSON.stringify(ratingData));
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in create: ${error.message}`);
+        }
     }
 
-    async updateRating(ratingId, ratingData) {
-        return await this.ratingService.updateRating(ratingId, ratingData);
+    async update(ratingId, ratingData) {
+        try {
+            console.log(`Method: update called with ratingId: ${ratingId} and data:`, JSON.stringify(ratingData));
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in update: ${error.message}`);
+        }
     }
 
-    async deleteRating(ratingId) {
-        return await this.ratingService.deleteRating(ratingId);
+    async delete(ratingId) {
+        try {
+            console.log(`Method: delete called with ratingId: ${ratingId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in delete: ${error.message}`);
+        }
     }
+
+
+    async findAllForDoctor(email) {
+        try {
+            console.log(`Method: findAllForDoctor called with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAllForDoctor: ${error.message}`);
+        }
+    }
+
+    async findByStaffId(empId) {
+        try {
+            console.log(`Method: findByStaffId called with empId: ${empId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByStaffId: ${error.message}`);
+        }
+    }
+
+
 }
 
-module.exports = new RatingPort(RatingService);
-
+module.exports = RatingPort;

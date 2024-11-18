@@ -1,30 +1,69 @@
-// MedicinePort.js
-const MedicineService = require("../core/services/MedicineService");
+
+
 
 class MedicinePort {
-    constructor(medicineService) {
-        this.medicineService = medicineService;
-    }
-    async findAllMedicines(user) {
-        console.log("Calling MedicineService.findAllMedicines with user:", user);
-        return await this.medicineService.findAllMedicines(user);
-    }
-
-    async findSingleMedicine(medicineId) {
-        return await this.medicineService.findSingleMedicine(medicineId);
+    async findAll() {
+        try {
+            console.log("Method: findAll");
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAll: ${error.message}`);
+        }
     }
 
-    async addMedicine(medicineData) {
-        return await this.medicineService.addMedicine(medicineData);
+    async findById(medicineId) {
+        try {
+            console.log(`Method: findById called with medicineId: ${medicineId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
     }
 
-    async updateMedicine(medicineId, medicineData) {
-        return await this.medicineService.updateMedicine(medicineId, medicineData);
+    async create(medicineData) {
+        try {
+            console.log("Method: create called with data:", JSON.stringify(medicineData));
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in create: ${error.message}`);
+        }
     }
 
-    async deleteMedicine(medicineId) {
-        return await this.medicineService.deleteMedicine(medicineId);
+    async update(medicineId, medicineData) {
+        try {
+            console.log(`Method: update called with medicineId: ${medicineId} and data:`, JSON.stringify(medicineData));
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in update: ${error.message}`);
+        }
+    }
+
+    async delete(medicineId) {
+        try {
+            console.log(`Method: delete called with medicineId: ${medicineId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in delete: ${error.message}`);
+        }
+    }
+
+    async findByPatientEmail(email) {
+        try {
+            console.log(`Method: findByPatientEmail called with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByPatientEmail: ${error.message}`);
+        }
+    }
+
+    async findByDoctorEmail(email) {
+        try {
+            console.log(`Method: findByDoctorEmail called with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error findByDoctorEmail: ${error.message}`);
+        }
     }
 }
 
-module.exports = new MedicinePort(MedicineService);
+module.exports = MedicinePort;

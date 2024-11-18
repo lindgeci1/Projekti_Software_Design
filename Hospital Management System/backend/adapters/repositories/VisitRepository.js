@@ -8,9 +8,10 @@ const Medicine = require('../../core/entities/Medicine');
 const PdfReport = require('../../core/entities/PdfReport');
 const Bill = require('../../core/entities/Bill');
 const sequelize = require('../../config/database');
-
-class VisitRepository {
+const VisitPort = require('../../ports/VisitPort');
+class VisitRepository extends VisitPort{
     constructor() {
+        super();
         this.Visit = Visit;
         this.Patient = Patient;
         this.Doctor = Doctor;

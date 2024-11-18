@@ -2,9 +2,10 @@ const Payroll = require("../../core/entities/Payroll");
 const Staff = require("../../core/entities/Staff");
 const sequelize = require("../../config/database");
 const { Op } = require("sequelize");
-
-class PayrollRepository {
+const PayrollPort = require("../../ports/PayrollPort");
+class PayrollRepository extends PayrollPort{
     constructor() {
+        super();
         this.Payroll = Payroll;
         this.Staff = Staff;
         this.sequelize = sequelize;

@@ -1,14 +1,15 @@
-const ReportPort = require("../../ports/ReportPort");
+
+const ReportService = require("../../core/services/ReportService");
 
 class ReportController {
-    constructor(reportPort) {
-        this.reportPort = reportPort;
+    constructor(reportService) {
+        this.reportService = reportService;
     }
     // Fetch reports based on user role
     async fetchReportsFromDB(req, res) {
         console.log("Fetching reports for user:", req.user);
         try {
-            await this.reportPort.fetchReportsFromDB(req, res);
+            await this.reportService.fetchReportsFromDB(req, res);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -17,7 +18,7 @@ class ReportController {
     // Get all reports
     async findAllReports(req, res) {
         try {
-            await this.reportPort.findAllReports(req, res);
+            await this.reportService.findAllReports(req, res);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -26,7 +27,7 @@ class ReportController {
     // Check if a report exists for a given patient
     async checkPatientReport(req, res) {
         try {
-            await this.reportPort.checkPatientReport(req, res);
+            await this.reportService.checkPatientReport(req, res);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -35,7 +36,7 @@ class ReportController {
     // Generate a PDF report
     async createPdf(req, res) {
         try {
-            await this.reportPort.createPdf(req, res);
+            await this.reportService.createPdf(req, res);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -44,7 +45,7 @@ class ReportController {
     // Send email with PDF attachment
     async sendEmailWithPdf(req, res) {
         try {
-            await this.reportPort.sendEmailWithPdf(req, res);
+            await this.reportService.sendEmailWithPdf(req, res);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -62,7 +63,7 @@ class ReportController {
     // Save report to the database
     async saveReportToDB(req, res) {
         try {
-            await this.reportPort.saveReportToDB(req, res);
+            await this.reportService.saveReportToDB(req, res);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -71,11 +72,11 @@ class ReportController {
     // Delete the report
     async deleteReport(req, res) {
         try {
-            await this.reportPort.deleteReport(req, res);
+            await this.reportService.deleteReport(req, res);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
     }
 }
 
-module.exports = new ReportController(ReportPort);
+module.exports = new ReportController(ReportService);

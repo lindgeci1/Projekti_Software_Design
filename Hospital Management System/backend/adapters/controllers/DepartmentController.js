@@ -1,13 +1,13 @@
-const DepartmentPort = require("../../ports/DepartmentPort");
+const DepartmentService = require("../../core/services/DepartmentServices");
 
 class DepartmentController {
-    constructor(departmentPort) {
-        this.departmentPort = departmentPort;
+    constructor(departmentService) {
+        this.departmentService = departmentService;
     }
     async findAllDepartments(req, res) {
         console.log("Fetching all departments");
         try {
-            const departments = await this.departmentPort.findAllDepartments();
+            const departments = await this.departmentService.findAllDepartments();
             res.status(200).json(departments);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -16,7 +16,7 @@ class DepartmentController {
 
     async findSingleDepartment(req, res) {
         try {
-            const department = await this.departmentPort.findSingleDepartment(req.params.id);
+            const department = await this.departmentService.findSingleDepartment(req.params.id);
             if (!department) {
                 return res.status(404).json({ message: "Department not found" });
             }
@@ -28,7 +28,7 @@ class DepartmentController {
 
     async addDepartment(req, res) {
         try {
-            const newDepartment = await this.departmentPort.addDepartment(req.body);
+            const newDepartment = await this.departmentService.addDepartment(req.body);
             res.status(201).json(newDepartment);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -37,7 +37,7 @@ class DepartmentController {
 
     async updateDepartment(req, res) {
         try {
-            const updatedDepartment = await this.departmentPort.updateDepartment(req.params.id, req.body);
+            const updatedDepartment = await this.departmentService.updateDepartment(req.params.id, req.body);
             if (!updatedDepartment) {
                 return res.status(404).json({ message: "Department not found or could not be updated" });
             }
@@ -49,7 +49,7 @@ class DepartmentController {
 
     async deleteDepartment(req, res) {
         try {
-            const deletedDepartment = await this.departmentPort.deleteDepartment(req.params.id);
+            const deletedDepartment = await this.departmentService.deleteDepartment(req.params.id);
             if (!deletedDepartment) {
                 return res.status(404).json({ message: "Department not found" });
             }
@@ -60,4 +60,4 @@ class DepartmentController {
     }
 }
 
-module.exports = new DepartmentController(DepartmentPort);
+module.exports = new DepartmentController(DepartmentService);

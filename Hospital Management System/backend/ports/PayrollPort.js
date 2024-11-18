@@ -1,29 +1,66 @@
-const PayrollService = require("../core/services/PayrollService");
-
 class PayrollPort {
-    constructor(payrollService) {
-        this.payrollService = payrollService;
-    }
-    async findAllPayrolls(user) {
-        console.log("Calling PayrollService.findAllPayrolls with user:", user);
-        return await this.payrollService.findAllPayrolls(user);
-    }
-
-    async findSinglePayroll(payrollId) {
-        return await this.payrollService.findSinglePayroll(payrollId);
+    async findAll() {
+        try {
+            console.log(`Calling findAll `);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAll: ${error.message}`);
+        }
     }
 
-    async addPayroll(payrollData) {
-        return await this.payrollService.addPayroll(payrollData);
+    async findById(payrollId) {
+        try {
+            console.log(`Calling findById with ID: ${payrollId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
     }
 
-    async updatePayroll(payrollId, payrollData) {
-        return await this.payrollService.updatePayroll(payrollId, payrollData);
+    async create(payrollData) {
+        try {
+            console.log(`Calling create with data: ${JSON.stringify(payrollData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in create: ${error.message}`);
+        }
     }
 
-    async deletePayroll(payrollId) {
-        return await this.payrollService.deletePayroll(payrollId);
+    async update(payrollId, payrollData) {
+        try {
+            console.log(`Calling update with ID: ${payrollId} and data: ${JSON.stringify(payrollData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in update: ${error.message}`);
+        }
+    }
+
+    async delete(payrollId) {
+        try {
+            console.log(`Calling delete with ID: ${payrollId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in delete: ${error.message}`);
+        }
+    }
+
+    async findByStaffId(staffId) {
+        try {
+            console.log(`Calling findByStaffId with ID: ${staffId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByStaffId: ${error.message}`);
+        }
+    }
+
+    async findByStaffEmail(email) {
+        try {
+            console.log(`Calling findByStaffEmail with ID: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByStaffEmail: ${error.message}`);
+        }
     }
 }
 
-module.exports = new PayrollPort(PayrollService);
+module.exports = PayrollPort;

@@ -1,33 +1,51 @@
-const DoctorService = require("../core/services/DoctorService");
 
 class DoctorPort {
-    constructor(doctorService) {
-        this.doctorService = doctorService;
-    }
-    async findAllDoctors() {
-        console.log("Calling DoctorService.findAllDoctors");
-        return await this.doctorService.findAllDoctors();
+
+
+    async findAll() {
+        try {
+            console.log("Method: findAllDoctors called");
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAllDoctors: ${error.message}`);
+        }
     }
 
-    async findSingleDoctor(doctorId) {
-        console.log(`Calling DoctorService.findSingleDoctor with ID: ${doctorId}`);
-        return await this.doctorService.findSingleDoctor(doctorId);
+    async findById(doctorId) {
+        try {
+            console.log(`Method: findSingleDoctor called with doctorId: ${doctorId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findSingleDoctor: ${error.message}`);
+        }
     }
 
-    async addDoctor(doctorData) {
-        console.log("Calling DoctorService.addDoctor with data:", doctorData);
-        return await this.doctorService.addDoctor(doctorData);
+    async create(doctorData) {
+        try {
+            console.log(`Method: addDoctor called with doctorData: ${JSON.stringify(doctorData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in addDoctor: ${error.message}`);
+        }
     }
 
-    async updateDoctor(doctorId, doctorData) {
-        console.log(`Calling DoctorService.updateDoctor with ID: ${doctorId} and data:`, doctorData);
-        return await this.doctorService.updateDoctor(doctorId, doctorData);
+    async update(doctorId, doctorData) {
+        try {
+            console.log(`Method: updateDoctor called with doctorId: ${doctorId} and doctorData: ${JSON.stringify(doctorData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in updateDoctor: ${error.message}`);
+        }
     }
 
-    async deleteDoctor(doctorId) {
-        console.log(`Calling DoctorService.deleteDoctor with ID: ${doctorId}`);
-        return await this.doctorService.deleteDoctor(doctorId);
+    async delete(doctorId) {
+        try {
+            console.log(`Method: deleteDoctor called with doctorId: ${doctorId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in deleteDoctor: ${error.message}`);
+        }
     }
 }
 
-module.exports = new DoctorPort(DoctorService);
+module.exports =  DoctorPort

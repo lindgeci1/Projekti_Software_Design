@@ -1,45 +1,99 @@
-const StaffService = require("../core/services/StaffService");
+
+
 
 class StaffPort {
-    constructor(staffService) {
-        this.staffService = staffService;
-    }
-    async findAllStaff(user) {
-        console.log("Calling StaffService.findAllStaff with user:", user);
-        return await this.staffService.findAllStaff(user);
-    }
-
-    async findSingleStaff(staffId) {
-        return await this.staffService.findSingleStaff(staffId);
+    async findAll(condition = {}) {
+        try {
+            console.log(`Method: findAllStaff called with user: ${condition}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAllStaff: ${error.message}`);
+        }
     }
 
-    async findStaffByEmail(email) {
-        return await this.staffService.findStaffByEmail(email);
+    async findById(staffId) {
+        try {
+            console.log(`Method: findSingleStaff called with staffId: ${staffId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findSingleStaff: ${error.message}`);
+        }
+    }
+
+    async findByEmail(email) {
+        try {
+            console.log(`Method: findStaffByEmail called with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findStaffByEmail: ${error.message}`);
+        }
     }
 
     async findDoctors() {
-        return await this.staffService.findDoctors();
+        try {
+            console.log("Method: findDoctors called");
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findDoctors: ${error.message}`);
+        }
     }
 
-    async addStaff(staffData) {
-        return await this.staffService.addStaff(staffData);
+    async create(staffData) {
+        try {
+            console.log(`Method: addStaff called with staffData: ${JSON.stringify(staffData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in addStaff: ${error.message}`);
+        }
     }
 
-    async updateStaff(staffId, staffData) {
-        return await this.staffService.updateStaff(staffId, staffData);
+    async update(staffId, staffData) {
+        try {
+            console.log(`Method: updateStaff called with staffId: ${staffId} and staffData: ${JSON.stringify(staffData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in updateStaff: ${error.message}`);
+        }
     }
 
-    async deleteStaff(staffId) {
-        return await this.staffService.deleteStaff(staffId);
+    async delete(staffId) {
+        try {
+            console.log(`Method: deleteStaff called with staffId: ${staffId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in deleteStaff: ${error.message}`);
+        }
     }
 
-    async checkStaffExistence(staffId) {
-        return await this.staffService.checkStaffExistence(staffId);
+    async checkExistence(staffId) {
+        try {
+            console.log(`Method: checkStaffExistence called with staffId: ${staffId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in checkStaffExistence: ${error.message}`);
+        }
     }
 
     async getDoctorByStaffEmail(email) {
-        return await this.staffService.getDoctorByStaffEmail(email);
+        try {
+            console.log(`Method: getDoctorByStaffEmail called with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in getDoctorByStaffEmail: ${error.message}`);
+        }
     }
 }
 
-module.exports = new StaffPort(StaffService);
+module.exports = StaffPort;
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,34 +1,58 @@
-const DepartmentService = require("../core/services/DepartmentServices");
+// DepartmentPort.js
 
 class DepartmentPort {
-    constructor(departmentService) {
-        this.departmentService = departmentService;
-    }
-    async findAllDepartments() {
-        console.log("Calling DepartmentService.findAllDepartments");
-        return await this.departmentService.findAllDepartments();
-    }
-
-    async findSingleDepartment(departmentId) {
-        console.log(`Calling DepartmentService.findSingleDepartment with ID: ${departmentId}`);
-        return await this.departmentService.findSingleDepartment(departmentId);
+    async findAll() {
+        try {
+            console.log("Method: findAll called");
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAll: ${error.message}`);
+        }
     }
 
-    async addDepartment(departmentData) {
-        console.log("Calling DepartmentService.addDepartment with data:", departmentData);
-        return await this.departmentService.addDepartment(departmentData);
+    async findById(departmentId) {
+        try {
+            console.log(`Method: findById called with ID: ${departmentId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
     }
 
-    async updateDepartment(departmentId, departmentData) {
-        console.log(`Calling DepartmentService.updateDepartment with ID: ${departmentId} and data:`, departmentData);
-        return await this.departmentService.updateDepartment(departmentId, departmentData);
+    async create(departmentData) {
+        try {
+            console.log(`Method: create called with data: ${JSON.stringify(departmentData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in create: ${error.message}`);
+        }
     }
 
-    async deleteDepartment(departmentId) {
-        console.log(`Calling DepartmentService.deleteDepartment with ID: ${departmentId}`);
-        return await this.departmentService.deleteDepartment(departmentId);
+    async update(departmentId, departmentData) {
+        try {
+            console.log(`Method: update called with ID: ${departmentId} and data: ${JSON.stringify(departmentData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in update: ${error.message}`);
+        }
+    }
+
+    async delete(departmentId) {
+        try {
+            console.log(`Method: delete called with ID: ${departmentId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in delete: ${error.message}`);
+        }
+    }
+    async findByName(deptName) {
+        try {
+            console.log(`Method: findByName called with deptName: ${deptName}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByName: ${error.message}`);
+        }
     }
 }
 
-module.exports = new DepartmentPort(DepartmentService);
-
+module.exports = DepartmentPort

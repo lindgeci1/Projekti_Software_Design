@@ -1,13 +1,14 @@
-const RatingPort = require("../../ports/RatingPort");
+
+const RatingService = require("../../core/services/RatingServices");
 
 class RatingController {
-    constructor(ratingPort) {
-        this.ratingPort = ratingPort;
+    constructor(ratingService) {
+        this.ratingService = ratingService;
     }
     async findAllRatings(req, res) {
         console.log("Fetching ratings for user:", req.user);
         try {
-            const ratings = await this.ratingPort.findAllRatings(req.user);
+            const ratings = await this.ratingService.findAllRatings(req.user);
             res.status(200).json(ratings);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -16,7 +17,7 @@ class RatingController {
 
     async findSingleRating(req, res) {
         try {
-            const rating = await this.ratingPort.findSingleRating(req.params.id);
+            const rating = await this.ratingService.findSingleRating(req.params.id);
             if (!rating) {
                 return res.status(404).json({ message: "Rating not found" });
             }
@@ -28,7 +29,7 @@ class RatingController {
 
     async addRating(req, res) {
         try {
-            const newRating = await this.ratingPort.addRating(req.body);
+            const newRating = await this.ratingService.addRating(req.body);
             res.status(201).json(newRating);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -37,7 +38,7 @@ class RatingController {
 
     async updateRating(req, res) {
         try {
-            const updatedRating = await this.ratingPort.updateRating(req.params.id, req.body);
+            const updatedRating = await this.ratingService.updateRating(req.params.id, req.body);
             if (!updatedRating) {
                 return res.status(404).json({ message: "Rating not found or could not be updated" });
             }
@@ -49,7 +50,7 @@ class RatingController {
 
     async deleteRating(req, res) {
         try {
-            const deletedRating = await this.ratingPort.deleteRating(req.params.id);
+            const deletedRating = await this.ratingService.deleteRating(req.params.id);
             if (!deletedRating) {
                 return res.status(404).json({ message: "Rating not found" });
             }
@@ -60,4 +61,4 @@ class RatingController {
     }
 }
 
-module.exports = new RatingController(RatingPort);
+module.exports = new RatingController(RatingService);

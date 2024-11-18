@@ -5,9 +5,10 @@ const Staff = require('../../core/entities/Staff');
 const Visit = require('../../core/entities/Visits');
 const Doctor = require('../../core/entities/Doctor');
 const sequelize = require('../../config/database');
-
-class RoomRepository {
+const RoomPort = require('../../ports/RoomPort');
+class RoomRepository extends RoomPort{
     constructor() {
+        super();
         this.Room = Room;
         this.Patient = Patient;
         this.Staff = Staff;

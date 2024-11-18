@@ -5,10 +5,11 @@ const Role = require('../../core/entities/Role');
 const { Op, Sequelize } = require("sequelize");
 const Patient = require('../../core/entities/Patient');
 const Staff = require('../../core/entities/Staff'); // Make sure to import the Staff model
+const UserPort = require('../../ports/UserPort'); 
 
-
-class UserRepository {
+class UserRepository extends UserPort{
     constructor() {
+        super();
         this.Staff = Staff;
         this.UserRole = UserRole;
         this.Role = Role;

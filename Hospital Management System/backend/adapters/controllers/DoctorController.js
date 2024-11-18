@@ -1,13 +1,13 @@
-const DoctorPort = require("../../ports/DoctorPort");
+const DoctorService = require("../../core/services/DoctorService");
 
 class DoctorController {
-    constructor(doctorPort) {
-        this.doctorPort = doctorPort;
+    constructor(doctorService) {
+        this.doctorService = doctorService;
     }
     async findAllDoctors(req, res) {
         console.log("Fetching all doctors");
         try {
-            const doctors = await this.doctorPort.findAllDoctors();
+            const doctors = await this.doctorService.findAllDoctors();
             res.status(200).json(doctors);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -16,7 +16,7 @@ class DoctorController {
 
     async findSingleDoctor(req, res) {
         try {
-            const doctor = await this.doctorPort.findSingleDoctor(req.params.id);
+            const doctor = await this.doctorService.findSingleDoctor(req.params.id);
             if (!doctor) {
                 return res.status(404).json({ message: "Doctor not found" });
             }
@@ -28,7 +28,7 @@ class DoctorController {
 
     async addDoctor(req, res) {
         try {
-            const newDoctor = await this.doctorPort.addDoctor(req.body);
+            const newDoctor = await this.doctorService.addDoctor(req.body);
             res.status(201).json(newDoctor);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -37,7 +37,7 @@ class DoctorController {
 
     async updateDoctor(req, res) {
         try {
-            const updatedDoctor = await this.doctorPort.updateDoctor(req.params.id, req.body);
+            const updatedDoctor = await this.doctorService.updateDoctor(req.params.id, req.body);
             if (!updatedDoctor) {
                 return res.status(404).json({ message: "Doctor not found or could not be updated" });
             }
@@ -49,7 +49,7 @@ class DoctorController {
 
     async deleteDoctor(req, res) {
         try {
-            const deletedDoctor = await this.doctorPort.deleteDoctor(req.params.id);
+            const deletedDoctor = await this.doctorService.deleteDoctor(req.params.id);
             if (!deletedDoctor) {
                 return res.status(404).json({ message: "Doctor not found" });
             }
@@ -60,4 +60,4 @@ class DoctorController {
     }
 }
 
-module.exports = new DoctorController(DoctorPort);
+module.exports = new DoctorController(DoctorService);

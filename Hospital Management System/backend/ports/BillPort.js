@@ -1,30 +1,85 @@
-// BillPort.js
-const BillService = require("../core/services/BillService");
-
 class BillPort {
-    constructor(billService) {
-        this.billService = billService;
-    }
-    async findAllBills(user) {
-        console.log("Calling BillService.findAllBills with user:", user);
-        return await this.billService.findAllBills(user);
-    }
-
-    async findSingleBill(billId) {
-        return await this.billService.findSingleBill(billId);
+    // Interface method signatures
+    async findAll() {
+        try {
+            console.log("Method: findAll(Bill) called");
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAll: ${error.message}`);
+        }
     }
 
-    async addBill(billData) {
-        return await this.billService.addBill(billData);
+    async findByPatientEmail(email) {
+        try {
+            console.log(`Method: findByPatientEmail called with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByPatientEmail: ${error.message}`);
+        }
     }
 
-    async updateBill(billId, billData) {
-        return await this.billService.updateBill(billId, billData);
+    async findByDoctorEmail(email) {
+        try {
+            console.log(`Method: findByDoctorEmail called with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByDoctorEmail: ${error.message}`);
+        }
     }
 
-    async deleteBill(billId) {
-        return await this.billService.deleteBill(billId);
+    async findById(billId) {
+        try {
+            console.log(`Method: findById called with billId: ${billId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
+    }
+
+    async findByPatientId(patientId) {
+        try {
+            console.log(`Method: findByPatientId called with patientId: ${patientId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByPatientId: ${error.message}`);
+        }
+    }
+
+    async findOtherBillByPatientId(billId, patientId) {
+        try {
+            console.log(`Method: findOtherBillByPatientId called with billId: ${billId} and patientId: ${patientId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findOtherBillByPatientId: ${error.message}`);
+        }
+    }
+
+    async create(billData) {
+        try {
+            console.log(`Method: create called with billData: ${JSON.stringify(billData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in create: ${error.message}`);
+        }
+    }
+
+    async update(billId, billData) {
+        try {
+            console.log(`Method: update called with billId: ${billId} and billData: ${JSON.stringify(billData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in update: ${error.message}`);
+        }
+    }
+
+    async delete(billId) {
+        try {
+            console.log(`Method: delete called with billId: ${billId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in delete: ${error.message}`);
+        }
     }
 }
 
-module.exports = new BillPort(BillService);
+module.exports = BillPort;

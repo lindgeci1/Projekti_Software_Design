@@ -4,9 +4,10 @@ const Staff = require('../../core/entities/Staff');
 const Doctor = require('../../core/entities/Doctor');
 const Visit = require('../../core/entities/Visits');
 const { Op } = require('sequelize');
-
-class MedicalHistoryRepository {
+const MedicalHistoryPort = require('../../ports/MedicalHistoryPort');
+class MedicalHistoryRepository extends MedicalHistoryPort{
     constructor() {
+        super();
         this.MedicalHistory = MedicalHistory;
         this.Patient = Patient;
         this.Staff = Staff;

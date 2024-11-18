@@ -7,9 +7,10 @@ const PdfReport = require("../../core/entities/PdfReport"); // If relevant for i
 const sequelize = require("../../config/database");
 const { Op } = require("sequelize");
 const Doctor = require('../../core/entities/Doctor');
-
-class InsuranceRepository {
+const InsurancePort = require('../../ports/InsurancePort');
+class InsuranceRepository extends InsurancePort{
     constructor() {
+        super();
         this.Insurance = Insurance;
         this.Patient = Patient;
         this.Staff = Staff;

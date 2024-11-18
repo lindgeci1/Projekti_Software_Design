@@ -1,67 +1,113 @@
-// PatientPort.js
-const PatientService = require("../core/services/PatientService");
 
 class PatientPort {
-    constructor(patientService) {
-        this.patientService = patientService;
+
+    async getPatientByEmail(email) {
+        try {
+            console.log(`Method: getPatientByEmail called with patientData: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in getPatientByEmail: ${error.message}`);
+        }
     }
-    async findAllPatients(user) {
-        console.log("Calling PatientService.findAllPatients with user:", user);
-        return await this.patientService.findAllPatients(user);
+    
+    async findAllPatients(userEmail, userRole) {
+        try {
+            console.log("Method: findAllPatients called with user:", userEmail, userRole);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAllPatients: ${error.message}`);
+        }
     }
 
     async findSinglePatient(patientId) {
-        return await this.patientService.findSinglePatient(patientId);
+        try {
+            console.log(`Method: findSinglePatient called with patientId: ${patientId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findSinglePatient: ${error.message}`);
+        }
     }
 
     async addPatient(patientData) {
-        return await this.patientService.addPatient(patientData);
+        try {
+            console.log(`Method: addPatient called with patientData: ${JSON.stringify(patientData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in addPatient: ${error.message}`);
+        }
     }
 
     async updatePatient(patientId, patientData) {
-        return await this.patientService.updatePatient(patientId, patientData);
+        try {
+            console.log(`Method: updatePatient called with patientId: ${patientId} and patientData: ${JSON.stringify(patientData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in updatePatient: ${error.message}`);
+        }
     }
 
     async deletePatient(patientId) {
-        return await this.patientService.deletePatient(patientId);
+        try {
+            console.log(`Method: deletePatient called with patientId: ${patientId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in deletePatient: ${error.message}`);
+        }
     }
 
     async checkPatientExistence(patientId) {
-        return await this.patientService.checkPatientExistence(patientId);
+        try {
+            console.log(`Method: checkPatientExistence called with patientId: ${patientId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in checkPatientExistence: ${error.message}`);
+        }
     }
 
     async findPatientByPersonalNumber(personalNumber) {
-        return await this.patientService.findPatientByPersonalNumber(personalNumber);
-    }
-    async findRoomCostByPatientId(patientId) {
         try {
-            console.log('Received patientId in Port:', patientId);
-            return await this.patientService.findRoomCostByPatientId(patientId);
+            console.log(`Method: findPatientByPersonalNumber called with personalNumber: ${personalNumber}`);
+            throw new Error("Method not implemented");
         } catch (error) {
-            console.error('Error in PatientPort while fetching room cost:', error); // Log entire error
-            throw new Error('Unable to fetch room cost'); // Handle error appropriately
+            console.error(`Error in findPatientByPersonalNumber: ${error.message}`);
         }
     }
-   
 
+    async findRoomCostByPatientId(patientId) {
+        try {
+            console.log(`Method: findRoomCostByPatientId called with patientId: ${patientId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findRoomCostByPatientId: ${error.message}`);
+        }
+    }
 
     async findMedicineCostByPatientId(patientId) {
         try {
-            console.log('Received patientId in Port:', patientId); // Log patientId
-            return await this.patientService.findMedicineCostByPatientId(patientId);
+            console.log(`Method: findMedicineCostByPatientId called with patientId: ${patientId}`);
+            throw new Error("Method not implemented");
         } catch (error) {
-            console.error('Error in PatientPort while fetching medicine cost:', error);
-            throw new Error('Unable to fetch medicine cost'); // Handle error appropriately
+            console.error(`Error in findMedicineCostByPatientId: ${error.message}`);
         }
     }
-   
+
     async findEmailByPatientId(patientId) {
-        return await this.patientService.findEmailByPatientId(patientId);
+        try {
+            console.log(`Method: findEmailByPatientId called with patientId: ${patientId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findEmailByPatientId: ${error.message}`);
+        }
     }
 
     async checkPatientVisit(patientId) {
-        return await this.patientService.checkPatientVisit(patientId);
+        try {
+            console.log(`Method: checkPatientVisit called with patientId: ${patientId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in checkPatientVisit: ${error.message}`);
+        }
     }
 }
 
-module.exports = new PatientPort(PatientService);
+module.exports = PatientPort;

@@ -1,58 +1,78 @@
-const UserService = require("../core/services/UserService");
+
 
 class UserPort {
-    constructor(userService) {
-        this.userService = userService;
-    }
-    async findAllUsers() {
-        console.log("Calling UserService.findAllUsers");
-        return await this.userService.findAllUsers();
+    async FindAllUsers() {
+        try {
+            console.log("Method: findAllUsers called");
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAllUsers: ${error.message}`);
+        }
     }
 
-    async findSingleUser(userId) {
-        console.log("Calling UserService.findSingleUser with ID:", userId);
-        return await this.userService.findSingleUser(userId);
+    async findById(userId) {
+        try {
+            console.log(`Method: findById called with userId: ${userId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
+    }
+
+    async getPatientByEmail(email) {
+        try {
+            console.log(`Method: getPatientByEmail called with email: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in getPatientByEmail: ${error.message}`);
+        }
+    }
+
+    async FindSingleUser(userId) {
+        try {
+            console.log(`Method: findSingleUser called with userId: ${userId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findSingleUser: ${error.message}`);
+        }
     }
 
     async AddUser(userData) {
-        console.log("Calling UserService.addUser with data:", userData);
-        return await this.userService.AddUser(userData);  // Make sure this calls the service method correctly
-    }
-
-// Port Layer
-async UpdateUser(userId, userData) {
-    console.log("Calling UserService.updateUser with ID:", userId);
-    return await this.userService.UpdateUser(userId, userData);  // Pass data to service
-}
-
-
-   // Port Layer: UserPort.js
-// Port Layer: UserPort.js
-async DeleteUser(userId) {
-    try {
-        // Call the service to delete the user
-        const result = await this.userService.DeleteUser(userId);
-
-        // If the result contains an error, return it
-        if (result.error) {
-            return { error: result.error };  // Return an error object
+        try {
+            console.log(`Method: addUser called with userData: ${JSON.stringify(userData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in addUser: ${error.message}`);
         }
-
-        return result;  // Return success result
-    } catch (error) {
-        console.error("Error in UserPort.DeleteUser:", error);
-        return { error: 'Internal Server Error' };  // Return a general error if something fails
     }
-}
 
+    async UpdateUser(userId, userData) {
+        try {
+            console.log(`Method: updateUser called with userId: ${userId} and userData: ${JSON.stringify(userData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in updateUser: ${error.message}`);
+        }
+    }
 
+    async DeleteUser(userId) {
+        try {
+            console.log(`Method: deleteUser called with userId: ${userId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in deleteUser: ${error.message}`);
+        }
+    }
 
-
-    // Get users with their roles
     async getUsersWithRoles() {
-        console.log("Calling UserService.getUsersWithRoles");
-        return await this.userService.getUsersWithRoles();
+        try {
+            console.log("Method: getUsersWithRoles called");
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in getUsersWithRoles: ${error.message}`);
+        }
     }
 }
 
-module.exports = new UserPort(UserService);
+module.exports = UserPort;
+

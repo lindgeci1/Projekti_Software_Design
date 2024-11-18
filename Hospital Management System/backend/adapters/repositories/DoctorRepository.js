@@ -1,9 +1,10 @@
 const Doctor = require("../../core/entities/Doctor");
 const Staff = require("../../core/entities/Staff"); // Import Staff model
 const sequelize = require("../../config/database");
-
-class DoctorRepository {
+const DoctorPort = require("../../ports/DoctorPort");
+class DoctorRepository extends DoctorPort{
   constructor() {
+    super();
     this.Doctor = Doctor;
     this.Staff = Staff; 
     this.sequelize = sequelize;

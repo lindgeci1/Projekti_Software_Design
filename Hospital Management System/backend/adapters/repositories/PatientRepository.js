@@ -4,9 +4,10 @@ const Visit = require('../../core/entities/Visits');
 const User = require('../../core/entities/User');
 const Room = require('../../core/entities/Room');
 const Medicine = require('../../core/entities/Medicine');
-
-class PatientRepository {
+const PatientPort = require('../../ports/PatientPort');
+class PatientRepository extends  PatientPort{
     constructor() {
+        super();
         this.Patient = Patient;
         this.User = User;
         this.Room = Room;

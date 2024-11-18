@@ -1,30 +1,75 @@
-// InsurancePort.js
-const InsuranceService = require("../core/services/InsuranceService");
-
 class InsurancePort {
-    constructor(insuranceService) {
-        this.insuranceService = insuranceService;
-    }
-    async findAllInsurances(user) {
-        console.log("Calling InsuranceService.findAllInsurances with user:", user);
-        return await this.insuranceService.findAllInsurances(user);
-    }
-
-    async findSingleInsurance(insuranceId) {
-        return await this.insuranceService.findSingleInsurance(insuranceId);
+    async findAll() {
+        try {
+            console.log(`Calling findAll`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAll: ${error.message}`);
+        }
     }
 
-    async addInsurance(insuranceData) {
-        return await this.insuranceService.addInsurance(insuranceData);
+    async findById(insuranceId) {
+        try {
+            console.log(`Calling findById with ID: ${insuranceId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
     }
 
-    async updateInsurance(insuranceId, insuranceData) {
-        return await this.insuranceService.updateInsurance(insuranceId, insuranceData);
+    async create(insuranceData) {
+        try {
+            console.log(`Calling create with data: ${JSON.stringify(insuranceData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in create: ${error.message}`);
+        }
     }
 
-    async deleteInsurance(insuranceId) {
-        return await this.insuranceService.deleteInsurance(insuranceId);
+    async update(insuranceId, insuranceData) {
+        try {
+            console.log(`Calling update with ID: ${insuranceId} and data: ${JSON.stringify(insuranceData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in update: ${error.message}`);
+        }
+    }
+
+    async delete(insuranceId) {
+        try {
+            console.log(`Calling delete with ID: ${insuranceId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in delete: ${error.message}`);
+        }
+    }
+
+    async findByPatientEmail(email) {
+        try {
+            console.log(`Calling findByPatientEmail with ID: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByPatientEmail: ${error.message}`);
+        }
+    }
+
+    async findByDoctorEmail(email) {
+        try {
+            console.log(`Calling findByDoctorEmail with ID: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByDoctorEmail: ${error.message}`);
+        }
+    }
+
+    async findOtherInsuranceByPolicyNumber(policyNumber) {
+        try {
+            console.log(`Calling findOtherInsuranceByPolicyNumber with ID: ${policyNumber}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findOtherInsuranceByPolicyNumber: ${error.message}`);
+        }
     }
 }
 
-module.exports = new InsurancePort(InsuranceService);
+module.exports = InsurancePort;

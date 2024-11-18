@@ -1,14 +1,17 @@
+
+
+
 // RoomController.js
-const RoomPort = require("../../ports/RoomPort");
+const RoomService = require("../../core/services/RoomService");
 
 class RoomController {
-    constructor(roomPort) {
-        this.roomPort = roomPort;
+    constructor(roomService) {
+        this.roomService = roomService;
     }
     async findAllRooms(req, res) {
         console.log("Fetching rooms for user:", req.user);
         try {
-            const rooms = await this.roomPort.findAllRooms(req.user);
+            const rooms = await this.roomService.findAllRooms(req.user);
             res.status(200).json(rooms);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -17,7 +20,7 @@ class RoomController {
 
     async findSingleRoom(req, res) {
         try {
-            const room = await this.roomPort.findSingleRoom(req.params.id);
+            const room = await this.roomService.findSingleRoom(req.params.id);
             if (!room) {
                 return res.status(404).json({ message: "Room not found" });
             }
@@ -29,7 +32,7 @@ class RoomController {
 
     async addRoom(req, res) {
         try {
-            const newRoom = await this.roomPort.addRoom(req.body);
+            const newRoom = await this.roomService.addRoom(req.body);
             res.status(201).json(newRoom);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -38,7 +41,7 @@ class RoomController {
 
     async updateRoom(req, res) {
         try {
-            const updatedRoom = await this.roomPort.updateRoom(req.params.id, req.body);
+            const updatedRoom = await this.roomService.updateRoom(req.params.id, req.body);
             if (!updatedRoom) {
                 return res.status(404).json({ message: "Room not found or could not be updated" });
             }
@@ -50,7 +53,7 @@ class RoomController {
 
     async deleteRoom(req, res) {
         try {
-            const deletedRoom = await this.roomPort.deleteRoom(req.params.id);
+            const deletedRoom = await this.roomService.deleteRoom(req.params.id);
             if (!deletedRoom) {
                 return res.status(404).json({ message: "Room not found" });
             }
@@ -61,4 +64,4 @@ class RoomController {
     }
 }
 
-module.exports = new RoomController(RoomPort);
+module.exports = new RoomController(RoomService);

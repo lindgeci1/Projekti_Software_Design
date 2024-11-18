@@ -1,8 +1,10 @@
 const EmergencyContact = require('../../core/entities/Emergency_Contact');
 const Patient = require('../../core/entities/Patient');
 const { Op } = require('sequelize');
-class EmergencyContactRepository {
+const EmergencyContactPort = require('../../ports/Emergency_ContactPort');
+class EmergencyContactRepository extends EmergencyContactPort{
     constructor() {
+        super();
         this.EmergencyContact = EmergencyContact;
         this.Patient = Patient;
     }

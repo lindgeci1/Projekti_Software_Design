@@ -1,30 +1,70 @@
-// RoomPort.js
-const RoomService = require("../core/services/RoomService");
+
+
+
 
 class RoomPort {
-    constructor(roomService) {
-        this.roomService = roomService;
-    }
-    async findAllRooms(user) {
-        console.log("Calling RoomService.findAllRooms with user:", user);
-        return await this.roomService.findAllRooms(user);
-    }
-
-    async findSingleRoom(roomId) {
-        return await this.roomService.findSingleRoom(roomId);
+    async findAll() {
+        try {
+            console.log("Method: findAll");
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findAll: ${error.message}`);
+        }
     }
 
-    async addRoom(roomData) {
-        return await this.roomService.addRoom(roomData);
+    async findById(roomId) {
+        try {
+            console.log(`Method: findById called with roomId: ${roomId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findById: ${error.message}`);
+        }
     }
 
-    async updateRoom(roomId, roomData) {
-        return await this.roomService.updateRoom(roomId, roomData);
+    async create(roomData) {
+        try {
+            console.log("Method: addRoom called with roomData:", JSON.stringify(roomData));
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in addRoom: ${error.message}`);
+        }
     }
 
-    async deleteRoom(roomId) {
-        return await this.roomService.deleteRoom(roomId);
+    async update(roomId, roomData) {
+        try {
+            console.log(`Method: updateRoom called with roomId: ${roomId} and roomData: ${JSON.stringify(roomData)}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in updateRoom: ${error.message}`);
+        }
     }
+
+    async delete(roomId) {
+        try {
+            console.log(`Method: deleteRoom called with roomId: ${roomId}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in deleteRoom: ${error.message}`);
+        }
+    }
+
+    async findByPatientEmail(email) {
+        try {
+            console.log(`Method: findByPatientEmail(Room) called with roomId: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByPatientEmail: ${error.message}`);
+        }
+    }
+    async findByDoctorEmail(email) {
+        try {
+            console.log(`Method: findByDoctorEmail(Room) called with roomId: ${email}`);
+            throw new Error("Method not implemented");
+        } catch (error) {
+            console.error(`Error in findByDoctorEmail: ${error.message}`);
+        }
+    }
+
 }
 
-module.exports = new RoomPort(RoomService);
+module.exports =  RoomPort;

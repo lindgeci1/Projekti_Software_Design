@@ -1,13 +1,13 @@
-const PayrollPort = require("../../ports/PayrollPort");
+const PayrollService = require("../../core/services/PayrollService");
 
 class PayrollController {
-    constructor(payrollPort) {
-        this.payrollPort = payrollPort;
+    constructor(payrollService) {
+        this.payrollService = payrollService;
     }
     async findAllPayrolls(req, res) {
         console.log("Fetching payrolls for user:", req.user);
         try {
-            const payrolls = await this.payrollPort.findAllPayrolls(req.user); // Ensure this matches the function name
+            const payrolls = await this.payrollService.findAllPayrolls(req.user); // Ensure this matches the function name
             res.status(200).json(payrolls);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -16,7 +16,7 @@ class PayrollController {
 
     async findSinglePayroll(req, res) {
         try {
-            const payroll = await this.payrollPort.findSinglePayroll(req.params.id);
+            const payroll = await this.payrollService.findSinglePayroll(req.params.id);
             if (!payroll) {
                 return res.status(404).json({ message: "Payroll not found" });
             }
@@ -28,7 +28,7 @@ class PayrollController {
 
     async addPayroll(req, res) {
         try {
-            const newPayroll = await this.payrollPort.addPayroll(req.body);
+            const newPayroll = await this.payrollService.addPayroll(req.body);
             res.status(201).json(newPayroll);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -37,7 +37,7 @@ class PayrollController {
 
     async updatePayroll(req, res) {
         try {
-            const updatedPayroll = await this.payrollPort.updatePayroll(req.params.id, req.body);
+            const updatedPayroll = await this.payrollService.updatePayroll(req.params.id, req.body);
             if (!updatedPayroll) {
                 return res.status(404).json({ message: "Payroll not found or could not be updated" });
             }
@@ -49,7 +49,7 @@ class PayrollController {
 
     async deletePayroll(req, res) {
         try {
-            const deletedPayroll = await this.payrollPort.deletePayroll(req.params.id);
+            const deletedPayroll = await this.payrollService.deletePayroll(req.params.id);
             if (!deletedPayroll) {
                 return res.status(404).json({ message: "Payroll not found" });
             }
@@ -60,4 +60,4 @@ class PayrollController {
     }
 }
 
-module.exports = new PayrollController(PayrollPort);
+module.exports = new PayrollController(PayrollService);
