@@ -14,7 +14,7 @@ class UserRoutes {
         this.router.get("/users/:id", authenticateToken(['admin', 'doctor', 'patient']), UserController.findSingleUser.bind(UserController));
         this.router.post("/users/create", authenticateToken(['admin', 'doctor', 'patient']), UserController.AddUser.bind(UserController));
         this.router.put("/users/update/:id", authenticateToken(['admin', 'doctor', 'patient']), UserController.UpdateUser.bind(UserController));
-        this.router.delete("/users/delete/:id", authenticateToken(['admin', 'doctor', 'patient']), UserController.DeleteUser.bind(UserController));
+        this.router.delete("/users/delete/:id", authenticateToken(['admin', 'doctor']), UserController.DeleteUser.bind(UserController));
 
         // Additional user-specific routes
        
