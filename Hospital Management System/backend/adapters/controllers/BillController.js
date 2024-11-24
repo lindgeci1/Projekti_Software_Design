@@ -1,5 +1,3 @@
-const BillService = require("../../core/services/BillService");
-
 class BillController {
     constructor(billService) {
         this.billService = billService;
@@ -60,4 +58,4 @@ class BillController {
     }
 }
 
-module.exports = new BillController(BillService);
+module.exports =  BillController;

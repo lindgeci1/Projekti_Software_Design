@@ -422,4 +422,4 @@ async deleteReport(req, res){
     }
 };
 }
-    module.exports = new ReportRepository();
+    module.exports = ReportRepository;

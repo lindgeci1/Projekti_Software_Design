@@ -131,4 +131,4 @@ class BillRepository extends BillPort {
     }
 }
 
-module.exports = new BillRepository();
+module.exports = BillRepository;

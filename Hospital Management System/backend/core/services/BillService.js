@@ -1,6 +1,3 @@
-// BillService.js
-const BillRepository = require("../../adapters/repositories/BillRepository");
-
 class BillService {
     constructor(billRepository) {
         this.billRepository = billRepository;
@@ -62,4 +59,4 @@ class BillService {
     }
 }
 
-module.exports = new BillService(BillRepository);
+module.exports = BillService;

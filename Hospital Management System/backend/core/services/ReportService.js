@@ -1,5 +1,3 @@
-const ReportRepository = require('../../adapters/repositories/ReportRepository'); // Adjust the path as necessary
-
 class ReportService {
     constructor(reportRepository) {
         this.reportRepository = reportRepository;
@@ -86,4 +84,4 @@ class ReportService {
     }
 }
 
-module.exports = new ReportService(ReportRepository);
+module.exports = ReportService;
