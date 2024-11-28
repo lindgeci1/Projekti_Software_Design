@@ -1,5 +1,5 @@
 const express = require("express");
-const Factory = require("../Factory");  
+const Factory = require("../FactoryPattern/Factory");  
 const { authenticateToken } = require('../middleware/authMiddleware');
 
 class BillRoutes {

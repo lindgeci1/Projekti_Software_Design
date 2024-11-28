@@ -103,4 +103,4 @@ class PayrollRepository extends PayrollPort{
     }
 }
 
-module.exports = new PayrollRepository();
+module.exports = PayrollRepository;

@@ -1,4 +1,3 @@
-const PayrollRepository = require("../../adapters/repositories/PayrollRepository");
 
 class PayrollService {
     constructor(payrollRepository) {
@@ -77,4 +76,4 @@ class PayrollService {
     }
 }
 
-module.exports = new PayrollService(PayrollRepository);
+module.exports =  PayrollService;

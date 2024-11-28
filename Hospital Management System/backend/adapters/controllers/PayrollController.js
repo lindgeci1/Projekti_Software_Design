@@ -1,4 +1,3 @@
-const PayrollService = require("../../core/services/PayrollService");
 
 class PayrollController {
     constructor(payrollService) {
@@ -60,4 +59,4 @@ class PayrollController {
     }
 }
 
-module.exports = new PayrollController(PayrollService);
+module.exports = PayrollController;

@@ -1,5 +1,3 @@
-const RatingRepository = require("../../adapters/repositories/RatingRepository");
-
 class RatingService {
     constructor(ratingRepository) {
         this.ratingRepository = ratingRepository;
@@ -68,4 +66,4 @@ class RatingService {
     }
 }
 
-module.exports = new RatingService(RatingRepository);
+module.exports = RatingService;

@@ -1,6 +1,4 @@
 
-const RatingService = require("../../core/services/RatingServices");
-
 class RatingController {
     constructor(ratingService) {
         this.ratingService = ratingService;
@@ -61,4 +59,4 @@ class RatingController {
     }
 }
 
-module.exports = new RatingController(RatingService);
+module.exports = RatingController;

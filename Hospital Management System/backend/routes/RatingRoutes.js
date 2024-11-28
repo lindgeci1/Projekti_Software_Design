@@ -1,19 +1,19 @@
-const express = require("express");
-const RatingController = require("../adapters/controllers/RatingController"); // Update the path if necessary
+const express = require("express"); 
+const FactoryProvider = require("../AsbtractFactoryPattern/FactoryProvider"); 
 const { authenticateToken } = require('../middleware/authMiddleware');
 
 class RatingRoutes {
     constructor() {
         this.router = express.Router();
-        this.initializeRoutes();
+        this.controller = FactoryProvider.getFactory('rating').createController(); this.initializeRoutes();
     }
 
     initializeRoutes() {
-        this.router.get("/rating", authenticateToken(['admin', 'doctor', 'patient']), RatingController.findAllRatings.bind(RatingController));
-        this.router.get("/rating/:id", authenticateToken(['admin', 'doctor', 'patient']), RatingController.findSingleRating.bind(RatingController));
-        this.router.post("/rating/create", authenticateToken(['admin', 'doctor', 'patient']), RatingController.addRating.bind(RatingController));
-        this.router.put("/rating/update/:id", authenticateToken(['admin', 'doctor']), RatingController.updateRating.bind(RatingController));
-        this.router.delete("/rating/delete/:id", authenticateToken(['admin', 'doctor', 'patient']), RatingController.deleteRating.bind(RatingController));
+        this.router.get("/rating", authenticateToken(['admin', 'doctor', 'patient']), this.controller.findAllRatings.bind(this.controller));
+        this.router.get("/rating/:id", authenticateToken(['admin', 'doctor', 'patient']), this.controller.findSingleRating.bind(this.controller));
+        this.router.post("/rating/create", authenticateToken(['admin', 'doctor', 'patient']), this.controller.addRating.bind(this.controller));
+        this.router.put("/rating/update/:id", authenticateToken(['admin', 'doctor']), this.controller.updateRating.bind(this.controller));
+        this.router.delete("/rating/delete/:id", authenticateToken(['admin', 'doctor', 'patient']), this.controller.deleteRating.bind(this.controller));
     }
 
     getRouter() {

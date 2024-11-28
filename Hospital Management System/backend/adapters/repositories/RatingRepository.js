@@ -56,4 +56,4 @@ class RatingRepository extends RatingPort{
     }
 }
 
-module.exports = new RatingRepository();
+module.exports = RatingRepository;
