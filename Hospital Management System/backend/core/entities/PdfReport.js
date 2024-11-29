@@ -42,5 +42,5 @@ class PdfReport {
 
 const pdfReportModel = new PdfReport().getModel();
 pdfReportModel.belongsTo(Patient, { foreignKey: 'Patient_ID' }); // Define association outside constructor
-
+Patient.hasOne(pdfReportModel, { foreignKey: 'Patient_ID' });
 module.exports = pdfReportModel;

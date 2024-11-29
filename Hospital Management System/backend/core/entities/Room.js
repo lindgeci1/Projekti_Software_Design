@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/database');
-const Patient = require('../entities/Patient');
+const Patient = require('./Patient'); 
 
 class Room {
   constructor() {
@@ -31,6 +31,7 @@ class Room {
     });
 
     this.model.belongsTo(Patient, { foreignKey: 'Patient_ID' });
+    Patient.hasOne(this.model, { foreignKey: 'Patient_ID' }); 
   }
 
   getModel() {

@@ -70,7 +70,9 @@ class Staff {
 
     // Define the associations
     this.model.belongsTo(Department, { foreignKey: 'Dept_ID' });
+    Department.hasMany(this.model, {foreignKey: 'Dept_ID'});
     this.model.belongsTo(User, { foreignKey: 'user_id' });
+    User.hasOne(this.model, { foreignKey: 'user_id' });
   }
 
   getModel() {

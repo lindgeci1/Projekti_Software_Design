@@ -49,5 +49,5 @@ class Insurance {
 // Create an instance and define associations outside of the constructor
 const insuranceModel = new Insurance().getModel();
 insuranceModel.belongsTo(Patient, { foreignKey: 'Patient_ID' });
-
+Patient.hasMany(insuranceModel, {foreignKey: 'Patient_ID'});
 module.exports = insuranceModel;

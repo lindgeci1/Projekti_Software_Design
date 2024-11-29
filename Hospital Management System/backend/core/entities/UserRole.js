@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/database');
-const User = require('./User');
-const Role = require('./Role');
+
 
 class UserRole {
   constructor() {
@@ -32,9 +31,6 @@ class UserRole {
       timestamps: true,
     });
 
-    // Define associations
-    // this.model.belongsTo(User, { foreignKey: 'user_id' });
-    // this.model.belongsTo(Role, { foreignKey: 'role_id' });
   }
 
   getModel() {

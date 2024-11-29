@@ -28,6 +28,7 @@ class Payroll {
     });
 
     this.model.belongsTo(Staff, { foreignKey: 'Emp_ID' });
+    Staff.hasOne(this.model, { foreignKey: 'Emp_ID' });
   }
 
   getModel() {

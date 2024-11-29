@@ -56,6 +56,7 @@ class Patient {
     });
 
     this.model.belongsTo(User, { foreignKey: 'user_id' });
+    User.hasOne(this.model, { foreignKey: 'user_id' });
   }
 
   getModel() {

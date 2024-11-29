@@ -37,6 +37,7 @@ class Medicine {
 
     // Set up association with the Patient model
     this.model.belongsTo(Patient, { foreignKey: 'Patient_ID' });
+    Patient.hasOne(this.model, { foreignKey: 'Patient_ID' });
   }
 
   getModel() {

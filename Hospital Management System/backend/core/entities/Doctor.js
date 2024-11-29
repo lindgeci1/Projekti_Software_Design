@@ -2,8 +2,9 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/database');// Import the Sequelize instance
 const Staff = require('../../core/entities/Staff'); // Import Staff model for association
 
-class Doctor {
+class Doctor extends Staff{
   constructor() {
+    super();
     this.model = sequelize.define('Doctor', {
       Doctor_ID: {
         type: DataTypes.INTEGER,

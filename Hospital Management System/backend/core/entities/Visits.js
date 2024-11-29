@@ -57,5 +57,6 @@ class Visit {
 const visitModel = new Visit().getModel();
 visitModel.belongsTo(Patient, { foreignKey: 'Patient_ID' });
 visitModel.belongsTo(Doctor, { foreignKey: 'Doctor_ID' });
-
+Patient.hasOne(visitModel, { foreignKey: 'Patient_ID' });
+Doctor.hasOne(visitModel, { foreignKey: 'Doctor_ID' });
 module.exports = visitModel;

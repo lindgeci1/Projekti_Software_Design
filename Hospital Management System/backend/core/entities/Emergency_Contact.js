@@ -37,6 +37,7 @@ class EmergencyContact {
 
     // Define association inside the constructor
     this.model.belongsTo(Patient, { foreignKey: 'Patient_ID' });
+    Patient.hasMany(this.model, {foreignKey: 'Patient_ID'});
   }
 
   getModel() {

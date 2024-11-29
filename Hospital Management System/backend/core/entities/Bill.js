@@ -47,5 +47,5 @@ class Bill {
 
 const billModel = new Bill().getModel();
 billModel.belongsTo(Patient, { foreignKey: 'Patient_ID' }); // Define association outside constructor
-
+Patient.hasOne(billModel, { foreignKey: 'Patient_ID' });
 module.exports = billModel;
