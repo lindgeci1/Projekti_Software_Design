@@ -1,17 +1,13 @@
-const RatingFactory = require('./RatingFactory');
-const PayrollFactory = require('./PayrollFactory');
+const factoryConfig = require('./factoryConfig');
 
 class FactoryProvider {
     static getFactory(type) {
+        const FactoryClass = factoryConfig[type.toLowerCase()];
+        if (!FactoryClass) {
+            throw new Error(`FactoryProvider Error: No factory found for type '${type}'`);
+        }
         try {
-            switch (type.toLowerCase()) {
-                case 'rating':
-                    return new RatingFactory();
-                case 'payroll':
-                    return new PayrollFactory();
-                default:
-                    throw new Error(`FactoryProvider Error: No factory found for type '${type}'`);
-            }
+            return new FactoryClass();
         } catch (error) {
             console.error(`FactoryProvider Error: ${error.message}`);
             throw error;
@@ -20,3 +16,4 @@ class FactoryProvider {
 }
 
 module.exports = FactoryProvider;
+
