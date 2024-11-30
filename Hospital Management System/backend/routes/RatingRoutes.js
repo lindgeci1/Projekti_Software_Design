@@ -9,11 +9,11 @@ class RatingRoutes {
     }
 
     initializeRoutes() {
-        this.router.get("/rating", authenticateToken(['admin', 'doctor', 'patient']), this.controller.findAllRatings.bind(this.controller));
-        this.router.get("/rating/:id", authenticateToken(['admin', 'doctor', 'patient']), this.controller.findSingleRating.bind(this.controller));
-        this.router.post("/rating/create", authenticateToken(['admin', 'doctor', 'patient']), this.controller.addRating.bind(this.controller));
+        this.router.get("/rating", authenticateToken(['admin', 'doctor']), this.controller.findAllRatings.bind(this.controller));
+        this.router.get("/rating/:id", authenticateToken(['admin', 'doctor']), this.controller.findSingleRating.bind(this.controller));
+        this.router.post("/rating/create", authenticateToken(['admin', 'doctor']), this.controller.addRating.bind(this.controller));
         this.router.put("/rating/update/:id", authenticateToken(['admin', 'doctor']), this.controller.updateRating.bind(this.controller));
-        this.router.delete("/rating/delete/:id", authenticateToken(['admin', 'doctor', 'patient']), this.controller.deleteRating.bind(this.controller));
+        this.router.delete("/rating/delete/:id", authenticateToken(['admin', 'doctor']), this.controller.deleteRating.bind(this.controller));
     }
 
     getRouter() {
