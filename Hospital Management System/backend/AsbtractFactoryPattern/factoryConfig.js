@@ -1,8 +1,8 @@
-const PayrollFactory = require('./PayrollFactory');
-const RatingFactory = require('./RatingFactory');
+const BillFactory = require('./BillFactory');
+const ReportFactory = require('./ReportFactory');
 const factoryConfig = {
-    rating: RatingFactory,
-    payroll: PayrollFactory,
+    report: ReportFactory,
+    bill: BillFactory,
     // Add more factories here dynamically
 };
 

@@ -1,21 +1,22 @@
-const express = require("express");
-const Factory = require("../FactoryPattern/Factory");  
+const express = require("express"); 
+const FactoryProvider = require("../AsbtractFactoryPattern/FactoryProvider"); 
 const { authenticateToken } = require('../middleware/authMiddleware');
 
 class BillRoutes {
     constructor() {
         this.router = express.Router();
-        this.billController = Factory.createComponent('bill');  // Create controller via factory once
+        // Use FactoryProvider to create the Bill controller
+        this.controller = FactoryProvider.getFactory('bill').createController();  
         this.initializeRoutes();
     }
 
     initializeRoutes() {
         // Use the same controller for all routes
-        this.router.get("/bills", authenticateToken(['admin', 'doctor', 'patient']), this.billController.findAllBills.bind(this.billController));
-        this.router.get("/bills/:id", authenticateToken(['admin', 'doctor', 'patient']), this.billController.findSingleBill.bind(this.billController));
-        this.router.post("/bills/create", authenticateToken(['admin', 'doctor', 'patient']), this.billController.addBill.bind(this.billController));
-        this.router.put("/bills/update/:id", authenticateToken(['admin', 'doctor']), this.billController.updateBill.bind(this.billController));
-        this.router.delete("/bills/delete/:id", authenticateToken(['admin', 'doctor', 'patient']), this.billController.deleteBill.bind(this.billController));
+        this.router.get("/bills", authenticateToken(['admin', 'doctor', 'patient']), this.controller.findAllBills.bind(this.controller));
+        this.router.get("/bills/:id", authenticateToken(['admin', 'doctor', 'patient']), this.controller.findSingleBill.bind(this.controller));
+        this.router.post("/bills/create", authenticateToken(['admin', 'doctor', 'patient']), this.controller.addBill.bind(this.controller));
+        this.router.put("/bills/update/:id", authenticateToken(['admin', 'doctor']), this.controller.updateBill.bind(this.controller));
+        this.router.delete("/bills/delete/:id", authenticateToken(['admin', 'doctor', 'patient']), this.controller.deleteBill.bind(this.controller));
     }
 
     getRouter() {
