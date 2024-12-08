@@ -1,6 +1,6 @@
-const PayrollRepository = require("../adapters/repositories/PayrollRepository");
-const PayrollService = require("../core/services/PayrollService");
-const PayrollController = require("../adapters/controllers/PayrollController");
+const PayrollRepository = require("../../adapters/repositories/PayrollRepository");
+const PayrollService = require("../services/PayrollService");
+const PayrollController = require("../../adapters/controllers/PayrollController");
 const BaseFactory = require("./BaseFactory");
 
 class PayrollFactory extends BaseFactory {

@@ -1,5 +1,5 @@
 const express = require("express"); 
-const Factory = require("../FactoryPattern/Factory");  
+const Factory = require("../core/factories/Factory");  
 const { authenticateToken } = require('../middleware/authMiddleware');
 
 class PayrollRoutes {

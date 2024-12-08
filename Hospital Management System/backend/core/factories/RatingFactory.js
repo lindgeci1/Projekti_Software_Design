@@ -1,6 +1,6 @@
-const RatingRepository = require("../adapters/repositories/RatingRepository");
-const RatingService = require("../core/services/RatingServices");
-const RatingController = require("../adapters/controllers/RatingController");
+const RatingRepository = require("../../adapters/repositories/RatingRepository");
+const RatingService = require("../services/RatingServices");
+const RatingController = require("../../adapters/controllers/RatingController");
 const BaseFactory = require("./BaseFactory");
 
 class RatingFactory extends BaseFactory {

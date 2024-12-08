@@ -1,13 +1,13 @@
 const AbstractFactory = require('./AbstractFactory');
-const BillService = require('../core/services/BillService');
-const BillRepository = require('../adapters/repositories/BillRepository');
-const BillController = require('../adapters/controllers/BillController');
-const Logger = require('./Logger');
+const ReportService = require('../services/ReportService');
+const ReportRepository = require('../../adapters/repositories/ReportRepository');
+const ReportController = require('../../adapters/controllers/ReportController');
+const Logger = require('./Logger');  // Import the logger
 
-class BillFactory extends AbstractFactory {
+class ReportFactory extends AbstractFactory {
     createRepository() {
         try {
-            return new BillRepository();
+            return new ReportRepository();
         } catch (error) {
             Logger.logError(this, `Error creating repository - ${error.message}`);
             throw error;
@@ -17,7 +17,7 @@ class BillFactory extends AbstractFactory {
     createService() {
         try {
             const repository = this.createRepository();
-            return new BillService(repository);
+            return new ReportService(repository);
         } catch (error) {
             Logger.logError(this, `Error creating service - ${error.message}`);
             throw error;
@@ -27,7 +27,7 @@ class BillFactory extends AbstractFactory {
     createController() {
         try {
             const service = this.createService();
-            return new BillController(service);
+            return new ReportController(service);
         } catch (error) {
             Logger.logError(this, `Error creating controller - ${error.message}`);
             throw error;
@@ -35,4 +35,4 @@ class BillFactory extends AbstractFactory {
     }
 }
 
-module.exports = BillFactory;
+module.exports = ReportFactory;

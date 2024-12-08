@@ -1,6 +1,6 @@
 const express = require('express');
 const { authenticateToken } = require('../middleware/authMiddleware');
-const FactoryProvider = require("../AsbtractFactoryPattern/FactoryProvider"); 
+const FactoryProvider = require("../core/abstract-factory/FactoryProvider"); 
 
 class ReportRoutes {
     constructor() {
