@@ -4,7 +4,7 @@ class RatingController {
         this.ratingService = ratingService;
     }
     async findAllRatings(req, res) {
-        console.log("Fetching ratings for user:", req.user);
+        // console.log("Fetching ratings for user:", req.user);
         try {
             const ratings = await this.ratingService.findAllRatings(req.user);
             res.status(200).json(ratings);

@@ -16,10 +16,10 @@ function CreatePayroll({ onClose }) {
     const navigate = useNavigate();
     const location = useLocation();
     const token = Cookies.get('token');
-
+const [existingPayrolls, setExistingPayrolls] = useState([]);
     useEffect(() => {
         fetchStaff();
-
+        fetchExistingRatings();
         // Get staff ID from location state
         const staffid = location.state?.staffid;
         if (staffid) {
@@ -47,8 +47,27 @@ function CreatePayroll({ onClose }) {
             [name]: value,
         }));
     };
-
+    const fetchExistingRatings = async () => {
+        try {
+            const response = await axios.get('http://localhost:9004/api/payroll', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            setExistingPayrolls(response.data);
+        } catch (error) {
+            console.error('Error fetching existing ratings:', error);
+        }
+    };
     const handleAddPayroll = async () => {
+        // Assuming existingPayrolls is already fetched and available as part of your component's state or props
+        const existingPayroll = existingPayrolls.find(p => p.Emp_ID === formData.Emp_ID);
+        
+        if (existingPayroll) {
+            showAlert('Employee already has a payroll assigned.');
+            return;
+        }
+    
         try {
             await axios.post('http://localhost:9004/api/payroll/create', formData, {
                 headers: {
@@ -58,11 +77,12 @@ function CreatePayroll({ onClose }) {
             navigate('/dashboard/payroll');
             window.location.reload();
         } catch (error) {
-            console.error('Error adding payroll:', error.response.data); // Log the actual response data
+            console.error('Error adding payroll:', error.response?.data);
             const errorMessage = error.response?.data?.error || 'Error adding payroll. Please try again.';
             showAlert(errorMessage);
         }
     };
+    
     
     
 

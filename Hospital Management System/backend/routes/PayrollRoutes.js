@@ -1,21 +1,39 @@
 const express = require("express"); 
-const Factory = require("../core/factories/Factory");  
+const Factory = require("../core/factory_pattern/Factory");  
 const { authenticateToken } = require('../middleware/authMiddleware');
 
 class PayrollRoutes {
     constructor() {
         this.router = express.Router();
-        this.payrollController = Factory.createComponent('payroll');  // Create controller via factory once
+        this.payrollController = null; 
         this.initializeRoutes();
     }
 
     initializeRoutes() {
-        // Use the same controller for all routes
-        this.router.get("/payroll", authenticateToken(['admin', 'doctor']), this.payrollController.findAllPayrolls.bind(this.payrollController));
-        this.router.get("/payroll/:id", authenticateToken(['admin', 'doctor']), this.payrollController.findSinglePayroll.bind(this.payrollController));
-        this.router.post("/payroll/create", authenticateToken(['admin', 'doctor']), this.payrollController.addPayroll.bind(this.payrollController));
-        this.router.put("/payroll/update/:id", authenticateToken(['admin', 'doctor']), this.payrollController.updatePayroll.bind(this.payrollController));
-        this.router.delete("/payroll/delete/:id", authenticateToken(['admin', 'doctor']), this.payrollController.deletePayroll.bind(this.payrollController));
+        this.router.get("/payroll", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('payroll', false);
+            controller.findAllPayrolls(req, res);
+        });
+
+        this.router.get("/payroll/:id", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('payroll', false);
+            controller.findSinglePayroll(req, res);
+        });
+
+        this.router.post("/payroll/create", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('payroll', true);
+            controller.addPayroll(req, res);
+        });
+
+        this.router.put("/payroll/update/:id", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('payroll', false);
+            controller.updatePayroll(req, res);
+        });
+
+        this.router.delete("/payroll/delete/:id", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('payroll', false);
+            controller.deletePayroll(req, res);
+        });
     }
 
     getRouter() {

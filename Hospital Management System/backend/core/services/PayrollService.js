@@ -5,7 +5,7 @@ class PayrollService {
     }
 
     async findAllPayrolls(user) {
-        console.log("Service: Finding all payroll records for user:", user);
+        // console.log("Service: Finding all payroll records for user:", user);
         const { email, role } = user;
         
         if (role === "admin") {

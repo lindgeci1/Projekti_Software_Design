@@ -48,7 +48,7 @@ async DeleteUser(userId) {
 
     // Call to UserRepository to get users with roles
     async getUsersWithRoles() {
-        console.log("Service: Getting users with roles");
+        // console.log("Service: Getting users with roles");
         return await this.userRepository.getUsersWithRoles();
     }
 }

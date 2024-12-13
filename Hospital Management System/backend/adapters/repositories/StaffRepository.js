@@ -22,7 +22,7 @@ class StaffRepository extends StaffPort{
     }
 
     async findAll(condition = {}) {
-        console.log("Repository: Fetching staff members with condition:", condition);
+        // console.log("Repository: Fetching staff members with condition:", condition);
         return await this.Staff.findAll({
             where: condition,  // Apply the condition here
             include: [{ model: this.Department }],

@@ -4,7 +4,7 @@ class PayrollController {
         this.payrollService = payrollService;
     }
     async findAllPayrolls(req, res) {
-        console.log("Fetching payrolls for user:", req.user);
+        // console.log("Fetching payrolls for user:", req.user);
         try {
             const payrolls = await this.payrollService.findAllPayrolls(req.user); // Ensure this matches the function name
             res.status(200).json(payrolls);

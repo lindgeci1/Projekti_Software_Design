@@ -1,21 +1,39 @@
-const express = require("express"); 
-const Factory = require("../core/factories/Factory");  
+const express = require("express");
+const Factory = require("../core/factory_pattern/Factory");
 const { authenticateToken } = require('../middleware/authMiddleware');
 
 class RatingRoutes {
     constructor() {
         this.router = express.Router();
-        this.ratingController = Factory.createComponent('rating');  // Create controller via factory once
+        this.ratingController = null;  
         this.initializeRoutes();
     }
 
     initializeRoutes() {
-        // Use the same controller for all routes
-        this.router.get("/rating", authenticateToken(['admin', 'doctor']), this.ratingController.findAllRatings.bind(this.ratingController));
-        this.router.get("/rating/:id", authenticateToken(['admin', 'doctor']), this.ratingController.findSingleRating.bind(this.ratingController));
-        this.router.post("/rating/create", authenticateToken(['admin', 'doctor']), this.ratingController.addRating.bind(this.ratingController));
-        this.router.put("/rating/update/:id", authenticateToken(['admin', 'doctor']), this.ratingController.updateRating.bind(this.ratingController));
-        this.router.delete("/rating/delete/:id", authenticateToken(['admin', 'doctor']), this.ratingController.deleteRating.bind(this.ratingController));
+        this.router.get("/rating", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('rating', false);
+            controller.findAllRatings(req, res);
+        });
+
+        this.router.get("/rating/:id", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('rating', false);
+            controller.findSingleRating(req, res);
+        });
+
+        this.router.post("/rating/create", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('rating', true); 
+            controller.addRating(req, res);
+        });
+
+        this.router.put("/rating/update/:id", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('rating', false);
+            controller.updateRating(req, res);
+        });
+
+        this.router.delete("/rating/delete/:id", authenticateToken(['admin', 'doctor']), (req, res) => {
+            const controller = Factory.createComponent('rating', false);
+            controller.deleteRating(req, res);
+        });
     }
 
     getRouter() {

@@ -13,7 +13,7 @@ class RatingRepository extends RatingPort{
     }
 
     async findAll() {
-        console.log("Repository: Fetching all ratings");
+        // console.log("Repository: Fetching all ratings");
         return await this.Rating.findAll({
             include: [{ model: this.Staff, attributes: ["Emp_Fname", "Emp_Lname"] }],
         });
@@ -41,7 +41,7 @@ class RatingRepository extends RatingPort{
     }
 
     async create(ratingData) {
-        console.log("Repository: Creating a new rating");
+        // console.log("Repository: Creating a new rating");
         return await this.Rating.create(ratingData);
     }
 

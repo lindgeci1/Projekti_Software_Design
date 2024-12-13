@@ -8,7 +8,7 @@ class StaffController {
     }
     // Get all staff based on the user's role
     async findAllStaff(req, res) {
-        console.log("Fetching staff for user:", req.user);
+        // console.log("Fetching staff for user:", req.user);
         try {
             const staff = await this.staffService.findAllStaff(req.user);
             res.status(200).json(staff);

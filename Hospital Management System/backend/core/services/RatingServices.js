@@ -4,7 +4,7 @@ class RatingService {
     }
 
     async findAllRatings(user) {
-        console.log("Service: Finding all ratings for user:", user);
+        // console.log("Service: Finding all ratings for user:", user);
         const { email, role } = user;
         if (role === "admin") {
             return await this.ratingRepository.findAll();

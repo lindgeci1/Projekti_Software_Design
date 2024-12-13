@@ -8,7 +8,7 @@ class StaffService {
     }
 
     async findAllStaff(user) {
-        console.log("Service: Finding all staff for user:", user);
+        // console.log("Service: Finding all staff for user:", user);
         const { email, role } = user;
         let staffMembers;
     

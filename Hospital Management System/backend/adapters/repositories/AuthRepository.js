@@ -175,7 +175,7 @@ class AuthRepository {
             const refreshToken = generateRefreshToken(user);
    
             // Print refresh token to console
-            console.log('Refresh Token:', refreshToken);
+            // console.log('Refresh Token:', refreshToken);
    
             res.status(200).json({ token, token1, refreshToken, username: user.username, email: user.email });
         } catch (error) {

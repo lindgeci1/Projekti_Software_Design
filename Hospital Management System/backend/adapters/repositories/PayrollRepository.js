@@ -13,11 +13,11 @@ class PayrollRepository extends PayrollPort{
 
     async findAll() {
         try {
-            console.log("Repository: Fetching all payroll records");
+            // console.log("Repository: Fetching all payroll records");
             const payrolls = await this.Payroll.findAll({
                 include: [{ model: this.Staff, attributes: ["Emp_Fname", "Emp_Lname"] }],
             });
-            console.log("Repository: All payroll records fetched:", payrolls);
+            // console.log("Repository: All payroll records fetched:", payrolls);
             return payrolls;
         } catch (error) {
             console.error("Error fetching payroll records:", error);
@@ -65,7 +65,7 @@ class PayrollRepository extends PayrollPort{
             
             // Now create the new Payroll record
             const newPayroll = await this.Payroll.create(payrollData);
-            console.log("Repository: New payroll record created:", newPayroll);
+            // console.log("Repository: New payroll record created:", newPayroll);
             return newPayroll;
         } catch (error) {
             console.error("Error creating payroll record:", error);
@@ -77,7 +77,7 @@ class PayrollRepository extends PayrollPort{
         try {
             const [updatedRows] = await this.Payroll.update(payrollData, { where: { Account_no: payrollId } });
             if (updatedRows === 0) throw new Error("Payroll record not found or not updated");
-            console.log("Repository: Payroll record updated:", updatedRows);
+            // console.log("Repository: Payroll record updated:", updatedRows);
             return updatedRows;
         } catch (error) {
             console.error("Error updating payroll record:", error);
