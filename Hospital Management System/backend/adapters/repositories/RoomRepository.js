@@ -22,7 +22,7 @@ class RoomRepository extends RoomPort{
         const rooms = await this.Room.findAll({
             include: [{ model: this.Patient, attributes: ["Patient_Fname", "Patient_Lname"] }],
         });
-        console.log("Repository: All rooms fetched:", rooms);
+        // console.log("Repository: All rooms fetched:", rooms);
         return rooms;
     }
     async findById(roomId) {
@@ -91,4 +91,4 @@ class RoomRepository extends RoomPort{
     }
 }
 
-module.exports = new RoomRepository();
+module.exports = RoomRepository;

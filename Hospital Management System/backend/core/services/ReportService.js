@@ -1,3 +1,5 @@
+const ReportRepository = require("../../adapters/repositories/ReportRepository");
+
 class ReportService {
     constructor(reportRepository) {
         this.reportRepository = reportRepository;
@@ -84,4 +86,4 @@ class ReportService {
     }
 }
 
-module.exports = ReportService;
+module.exports = new ReportService(ReportRepository);

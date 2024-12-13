@@ -12,7 +12,7 @@ class PatientController {
         this.patientService = patientService;
     }
     async findAllPatients(req, res) {
-        console.log("Fetching patients for user:", req.user);
+        // console.log("Fetching patients for user:", req.user);
         try {
             const patients = await this.patientService.findAllPatients(req.user);
             res.status(200).json(patients);

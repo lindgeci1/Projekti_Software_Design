@@ -7,7 +7,7 @@ class PatientService {
     }
 
     async findAllPatients(user) {
-        console.log("Service: Finding all patients for user:", user);
+        // console.log("Service: Finding all patients for user:", user);
         const { email, role } = user;
         return await this.patientRepository.findAllPatients(email, role);
     }

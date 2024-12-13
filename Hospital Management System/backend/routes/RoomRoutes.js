@@ -1,19 +1,28 @@
 const express = require("express");
-const RoomController = require("../adapters/controllers/RoomController"); // Update the path if necessary
 const { authenticateToken } = require('../middleware/authMiddleware');
+
+const RoomController = require("../adapters/controllers/RoomController");
+const RoomServiceAdapter = require("../core/adapter_pattern/RoomServiceAdapter");
+const RoomRepository = require("../adapters/repositories/RoomRepository");
 
 class RoomRoutes {
     constructor() {
         this.router = express.Router();
-        this.initializeRoutes();
+
+        const roomRepository = new RoomRepository();
+        const roomAdapter = new RoomServiceAdapter(roomRepository);
+        const roomController = new RoomController(roomAdapter);
+
+  
+        this.initializeRoutes(roomController);
     }
 
-    initializeRoutes() {
-        this.router.get("/room", authenticateToken(['admin', 'doctor', 'patient']), RoomController.findAllRooms.bind(RoomController));
-        this.router.get("/room/:id", authenticateToken(['admin', 'doctor', 'patient']), RoomController.findSingleRoom.bind(RoomController));
-        this.router.post("/room/create", authenticateToken(['admin', 'doctor']), RoomController.addRoom.bind(RoomController));
-        this.router.put("/room/update/:id", authenticateToken(['admin', 'doctor']), RoomController.updateRoom.bind(RoomController));
-        this.router.delete("/room/delete/:id", authenticateToken(['admin', 'doctor']), RoomController.deleteRoom.bind(RoomController));
+    initializeRoutes(roomController) {
+        this.router.get("/room", authenticateToken(['admin', 'doctor', 'patient']), roomController.findAllRooms.bind(roomController));
+        this.router.get("/room/:id", authenticateToken(['admin', 'doctor', 'patient']), roomController.findSingleRoom.bind(roomController));
+        this.router.post("/room/create", authenticateToken(['admin', 'doctor']), roomController.addRoom.bind(roomController));
+        this.router.put("/room/update/:id", authenticateToken(['admin', 'doctor']), roomController.updateRoom.bind(roomController));
+        this.router.delete("/room/delete/:id", authenticateToken(['admin', 'doctor']), roomController.deleteRoom.bind(roomController));
     }
 
     getRouter() {

@@ -1,3 +1,5 @@
+const ReportService = require("../../core/services/ReportService");
+
 class ReportController {
     constructor(reportService) {
         this.reportService = reportService;
@@ -76,4 +78,4 @@ class ReportController {
     }
 }
 
-module.exports = ReportController;
+module.exports = new ReportController(ReportService);

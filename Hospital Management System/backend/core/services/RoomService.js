@@ -1,40 +1,30 @@
-// RoomService.js
-const RoomRepository = require("../../adapters/repositories/RoomRepository");
+const IRoomServiceAdapter = require("../adapter_pattern/IRoomServiceAdapter");
 
-class RoomService {
-    constructor(roomRepository) {
-        this.roomRepository = roomRepository;
+class RoomService extends IRoomServiceAdapter {
+    constructor(roomServiceAdapter) {
+        super(); 
+        this.roomServiceAdapter = roomServiceAdapter; 
     }
 
     async findAllRooms(user) {
-        console.log("Service: Finding all rooms for user:", user);
-        const { email, role } = user;
-        if (role === "admin") {
-            return await this.roomRepository.findAll();
-        } else if (role === "doctor") {
-            return await this.roomRepository.findByDoctorEmail(email);
-        } else if (role === "patient") {
-            return await this.roomRepository.findByPatientEmail(email);
-        } else {
-            throw new Error("Unauthorized access");
-        }
+        return await this.roomServiceAdapter.findAllRooms(user);
     }
 
     async findSingleRoom(roomId) {
-        return await this.roomRepository.findById(roomId);
+        return await this.roomServiceAdapter.findSingleRoom(roomId);
     }
 
     async addRoom(roomData) {
-        return await this.roomRepository.create(roomData);
+        return await this.roomServiceAdapter.addRoom(roomData);
     }
 
     async updateRoom(roomId, roomData) {
-        return await this.roomRepository.update(roomId, roomData);
+        return await this.roomServiceAdapter.updateRoom(roomId, roomData);
     }
 
     async deleteRoom(roomId) {
-        return await this.roomRepository.delete(roomId);
+        return await this.roomServiceAdapter.deleteRoom(roomId);
     }
 }
 
-module.exports = new RoomService(RoomRepository);
+module.exports = RoomService;
