@@ -4,16 +4,7 @@ class UserController {
     constructor(userService) {
         this.userService = userService;
     }
-    // Fetch all users (for admin)
-    async findAllUsers(req, res) {
-        console.log("Fetching users for user:", req.user);
-        try {
-            const users = await this.userService.findAllUsers();
-            res.status(200).json(users);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    }
+
 
     // Fetch a single user by ID
     async findSingleUser(req, res) {
@@ -44,12 +35,6 @@ async AddUser(req, res) {
     return res.json({ success: true, message: result.message, data: result.data });
 }
 
-
-    
-
-    // Update user details by ID
-// Controller Layer
-// Controller Layer (UserController.js)
 async UpdateUser(req, res) {
     try {
         const updatedUser = await this.userService.UpdateUser(req.params.id, req.body);  // Pass ID and body to port
@@ -68,10 +53,6 @@ async UpdateUser(req, res) {
     }
 }
 
-
-
-// Controller Layer: UserController.js
-// Controller Layer: UserController.js
 async DeleteUser(req, res) {
     try {
         const userId = req.params.id;  // Get user ID from the route params
@@ -93,13 +74,6 @@ async DeleteUser(req, res) {
     }
 }
 
-
-
-
-
-    
-
-    // Get users with their roles
     async getUsersWithRoles(req, res) {
         try {
             const users = await this.userService.getUsersWithRoles();

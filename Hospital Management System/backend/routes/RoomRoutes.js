@@ -9,9 +9,9 @@ class RoomRoutes {
     constructor() {
         this.router = express.Router();
 
-        const roomRepository = new RoomRepository();
-        const roomAdapter = new RoomServiceAdapter(roomRepository);
-        const roomController = new RoomController(roomAdapter);
+        const roomRepository = new RoomRepository();//sherben sikur adaptee
+        const roomAdapter = new RoomServiceAdapter(roomRepository);//adapter qe i bon adaptimin e t dhanave ne kat rast metodave
+        const roomController = new RoomController(roomAdapter);//clienti 
 
   
         this.initializeRoutes(roomController);

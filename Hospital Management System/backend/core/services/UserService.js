@@ -5,17 +5,12 @@ class UserService {
         this.userRepository = userRepository;
     }
 
-    async findAllUsers() {
-        console.log("Service: Finding all users");
-        return await this.userRepository.findAll();
-    }
-
     async findSingleUser(userId) {
         console.log("Service: Finding user with ID:", userId);
-        return await this.userRepository.findById(userId);
+        return await this.userRepository.findSingleUser(userId);
     }
 
-// In service layer
+
 async AddUser(userData) {
     try {
         return await this.userRepository.AddUser(userData);
@@ -25,15 +20,12 @@ async AddUser(userData) {
 }
 
 
-   // Service Layer
+
 async UpdateUser(userId, userData) {
     console.log("Service: Updating user with ID:", userId);
     return await this.userRepository.UpdateUser(userId, userData);  // Pass userId and data to repository
 }
 
-
-// Service Layer: UserService.js
-// Service Layer: UserService.js
 async DeleteUser(userId) {
     try {
         console.log("Service: Deleting user with ID:", userId);
@@ -45,8 +37,6 @@ async DeleteUser(userId) {
     }
 }
 
-
-    // Call to UserRepository to get users with roles
     async getUsersWithRoles() {
         // console.log("Service: Getting users with roles");
         return await this.userRepository.getUsersWithRoles();

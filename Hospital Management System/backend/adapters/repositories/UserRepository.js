@@ -18,10 +18,9 @@ class UserRepository extends UserPort{
         this.Sequelize = Sequelize;
     }
 
-    async findById(userId) {
+    async findSingleUser(userId) {
         try {
             return await User.findByPk(userId, {
-                // You can include related models as needed, e.g. UserRole, Role, etc.
                 include: [{
                     model: UserRole,
                     include: {
@@ -50,41 +49,6 @@ class UserRepository extends UserPort{
             throw error;
         }
     };
-    async FindAllUsers(req, res){
-        try {
-            const userEmail = req.user.email;
-            const userRole = req.user.role;
-    
-            let users;
-            if (userRole === 'admin') {
-                // Admin can fetch all users
-                users = await User.findAll();
-            } else if (userRole === 'patient') {
-                // Fetch the patient by email
-                const patient = await getPatientByEmail(userEmail);
-                if (!patient) {
-                    return res.status(404).json({ error: 'Patient not found' });
-                }
-                // Patients can fetch only their own information
-                users = await User.findAll({
-                    where: { email: userEmail },
-                });
-            } else {
-                return res.status(403).json({ error: 'Forbidden' });
-            }
-    
-            // Format the response to include additional data
-            const usersDataWithNames = users.map(user => ({
-                ...user.toJSON(),
-                FullName: `${user.firstName} ${user.lastName}` || 'Unknown User'
-            }));
-    
-            res.json(usersDataWithNames);
-        } catch (error) {
-            console.error('Error fetching users:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        }
-    };
     async getUsersWithRoles() {
         try {
             const users = await User.findAll({
@@ -103,46 +67,13 @@ class UserRepository extends UserPort{
                 role: user.UserRoles.length > 0 ? user.UserRoles[0].Role.role_name : 'No Role'
             }));
     
-            return usersWithRoles; // Just return the result
+            return usersWithRoles; 
         } catch (error) {
             console.error('Error fetching users with roles:', error);
             throw new Error('Internal server error');
         }
     }
-    async FindSingleUser (req, res){
-        try {
-            const user = await User.findByPk(req.params.id, {
-                include: [
-                    {
-                        model: UserRole,
-                        include: [
-                            {
-                                model: Role,
-                                attributes: ['role_name']  // Include role_name in the response
-                            }
-                        ]
-                    }
-                ],
-                attributes: ['user_id', 'username', 'email']  // Select relevant user attributes
-            });
-    
-            if (!user) {
-                res.status(404).json({ error: 'User not found' });
-                return;
-            }
-    
-            // Map the role from the UserRole relation
-            const userWithRole = {
-                ...user.toJSON(),
-                role: user.UserRoles.length > 0 ? user.UserRoles[0].Role.role_name : 'No Role'
-            };
-    
-            res.json(userWithRole);
-        } catch (error) {
-            console.error('Error fetching single user with role:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        }
-    };
+
     
     async AddUser(userData) {
         try {
@@ -216,7 +147,6 @@ class UserRepository extends UserPort{
         }
     }
     
-// Repository Layer (UserRepository.js)
 async UpdateUser(userId, userData) {
     try {
         const { email, username, password, role } = userData;
@@ -295,7 +225,6 @@ async UpdateUser(userId, userData) {
     }
 }
 
-// Repository Layer: UserRepository.js
 async DeleteUser(userId) {
     try {
         // Check if the user exists
@@ -313,10 +242,10 @@ async DeleteUser(userId) {
         // Delete the user
         await User.destroy({ where: { user_id: userId } });
 
-        return { success: true, message: 'User and associated staff/patients deleted successfully' };  // Return success message
+        return { success: true, message: 'User and associated staff/patients deleted successfully' };  
     } catch (error) {
         console.error('Error deleting user:', error);
-        return { error: 'Internal Server Error' };  // Return error object
+        return { error: 'Internal Server Error' };  
     }
 }
 

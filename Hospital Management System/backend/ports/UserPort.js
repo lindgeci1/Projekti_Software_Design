@@ -1,21 +1,13 @@
 
 
 class UserPort {
-    async FindAllUsers() {
-        try {
-            console.log("Method: findAllUsers called");
-            throw new Error("Method not implemented");
-        } catch (error) {
-            console.error(`Error in findAllUsers: ${error.message}`);
-        }
-    }
 
-    async findById(userId) {
+    async findSingleUser(userId) {
         try {
-            console.log(`Method: findById called with userId: ${userId}`);
+            console.log(`Method: findSingleUser called with userId: ${userId}`);
             throw new Error("Method not implemented");
         } catch (error) {
-            console.error(`Error in findById: ${error.message}`);
+            console.error(`Error in findSingleUser: ${error.message}`);
         }
     }
 
@@ -28,14 +20,6 @@ class UserPort {
         }
     }
 
-    async FindSingleUser(userId) {
-        try {
-            console.log(`Method: findSingleUser called with userId: ${userId}`);
-            throw new Error("Method not implemented");
-        } catch (error) {
-            console.error(`Error in findSingleUser: ${error.message}`);
-        }
-    }
 
     async AddUser(userData) {
         try {
